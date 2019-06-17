@@ -1,0 +1,13 @@
+
+demoExpire = "24h"
+
+[demo]
+	name = "user-acount-server"
+	proto = "tcp"
+	addr = "192.168.57.134:19000"
+	active = 50
+	idle = 10
+	dialTimeout = "100ms"
+	readTimeout = "200ms"
+	writeTimeout = "300ms"
+	idleTimeout = "80s"
