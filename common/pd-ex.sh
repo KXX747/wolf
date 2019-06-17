@@ -21,9 +21,11 @@
 #go get -u github.com/gogo/protobuf/protoc-gen-gogo
 
 
+#export GO111MODULE=on
+
 
 export KRATOS_HOME="/Users/a747/go/src/github.com/bilibili/kratos"
-export KRATOS_DEMO="/Users/a747/go/src/github.com/KXX747/wolf/public/user-acount-server/api"
+export KRATOS_DEMO="/Users/a747/go/src/github.com/KXX747/wolf/public/job-server/api"
 
 echo $KRATOS_HOME
 
@@ -37,6 +39,7 @@ protoc -I$GOPATH/src:$KRATOS_HOME/tool/protobuf/pkg/extensions:$KRATOS_DEMO --bm
 
 	# 生成：api.swagger.json
 protoc -I$GOPATH/src:$KRATOS_HOME/tool/protobuf/pkg/extensions:$KRATOS_DEMO --bswagger_out=. api.proto
+
 
 
 
