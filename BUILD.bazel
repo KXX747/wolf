@@ -1,0 +1,28 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/example/project
+gazelle(
+    name = "gazelle",
+    prefix = "wolf"
+
+
+)
+
+
+#ERROR: /private/var/tmp/_bazel_a747/df1b07e26767da5fa7c7821db57eb6f2/external/
+# io_bazel_rules_go/go/tools/builders/BUILD.bazel:55:1: no such package
+# '@org_golang_x_tools//go/analysis': BUILD file not found on package
+# path and referenced by '@io_bazel_rules_go//go/tools/builders:nogo_srcs'
+###*******
+#ERROR: Analysis of target '//:gazelle' failed; build aborted: no such package
+# '@org_golang_x_tools//go/analysis': BUILD file not found on package path
+
+
+#INFO: Elapsed time: 0.521s
+#INFO: 0 processes.
+#FAILED: Build did NOT complete successfully (27 packages loaded, 448 targets configured)
+#FAILED: Build did NOT complete successfully (27 packages loaded, 448 targets configured)
+#    Fetching @local_config_xcode; fetching
+
+
+
