@@ -4,7 +4,7 @@ demoExpire = "24h"
 [demo]
 	name = "user-getaway-servers"
 	proto = "tcp"
-	addr = "127.0.0.1:6389"
+	addr = "192.168.57.135:19000"
 	idle = 10
 	active = 10
 	dialTimeout = "1s"

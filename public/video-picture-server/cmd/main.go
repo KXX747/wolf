@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"video-picture-server/internal/server/grpc"
-	"video-picture-server/internal/server/http"
-	"video-picture-server/internal/service"
+	"github.com/KXX747/wolf/public/video-picture-server/internal/server/grpc"
+	"github.com/KXX747/wolf/public/video-picture-server/internal/server/http"
+	"github.com/KXX747/wolf/public/video-picture-server/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 )

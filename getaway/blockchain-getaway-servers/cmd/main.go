@@ -8,8 +8,8 @@ import (
 	"syscall"
 	"time"
 
-	"blockchain-getaway-servers/internal/server/http"
-	"blockchain-getaway-servers/internal/service"
+	"github.com/KXX747/wolf/getaway/blockchain-getaway-servers/internal/server/http"
+	"github.com/KXX747/wolf/getaway/blockchain-getaway-servers/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 )

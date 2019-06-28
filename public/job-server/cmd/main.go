@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"job-server/internal/server/grpc"
-	"job-server/internal/server/http"
-	"job-server/internal/service"
+	"github.com/KXX747/wolf/public/job-server/internal/server/grpc"
+	"github.com/KXX747/wolf/public/job-server/internal/server/http"
+	"github.com/KXX747/wolf/public/job-server/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 )

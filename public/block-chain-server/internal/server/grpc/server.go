@@ -1,8 +1,8 @@
 package grpc
 
 import (
-	pb "block-chain-server/api"
-	"block-chain-server/internal/service"
+	pb "github.com/KXX747/wolf/public/block-chain-server/api"
+	"github.com/KXX747/wolf/public/block-chain-server/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
 )

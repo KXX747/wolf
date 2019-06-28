@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	pb "job-server/api"
-	"job-server/internal/dao"
+	pb "github.com/KXX747/wolf/public/job-server/api"
+	"github.com/KXX747/wolf/public/job-server/internal/dao"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 
 	"github.com/golang/protobuf/ptypes/empty"

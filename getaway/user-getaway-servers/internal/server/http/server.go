@@ -2,8 +2,6 @@ package http
 
 import (
 	"net/http"
-
-	"github.com/KXX747/wolf/getaway/user-getaway-servers/internal/model"
 	"github.com/KXX747/wolf/getaway/user-getaway-servers/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
@@ -41,6 +39,9 @@ func initRouter(e *bm.Engine) {
 	g := e.Group("/user-getaway-servers")
 	{
 		g.GET("/start", howToStart)
+		g.POST("/newuser",addUser)
+		g.POST("/deleteuser",deleteUser)
+		g.POST("/updateuser",updateUser)
 	}
 }
 
@@ -49,12 +50,4 @@ func ping(ctx *bm.Context) {
 		log.Error("ping error(%v)", err)
 		ctx.AbortWithStatus(http.StatusServiceUnavailable)
 	}
-}
-
-// example for http request handler.
-func howToStart(c *bm.Context) {
-	k := &model.Kratos{
-		Hello: "Golang 大法好 !!!",
-	}
-	c.JSON(k, nil)
 }

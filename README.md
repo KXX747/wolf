@@ -5,7 +5,6 @@ public  服务
 
 
 
-
 export GO111MODULE=on 
 go mod download
 
@@ -16,6 +15,8 @@ export GO111MODULE=on
 go get -u github.com/bazelbuild/bazel-gazelle
 
 yacc安装 let
+解决goyacc错误 cmd/goyacc'
+
 go get github.com/golang/tools/cmd/goyacc
 https://github.com/golang/tools/tree/master/cmd/goyacc
 go build

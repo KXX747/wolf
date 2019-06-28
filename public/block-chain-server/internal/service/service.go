@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	pb "block-chain-server/api"
-	"block-chain-server/internal/dao"
+	pb "github.com/KXX747/wolf/public/block-chain-server/api"
+	"github.com/KXX747/wolf/public/block-chain-server/internal/dao"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 
 	"github.com/golang/protobuf/ptypes/empty"

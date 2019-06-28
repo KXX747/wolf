@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	pb "video-picture-server/api"
-	"video-picture-server/internal/dao"
+	pb "github.com/KXX747/wolf/public/video-picture-server/api"
+	"github.com/KXX747/wolf/public/video-picture-server/internal/dao"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 
 	"github.com/golang/protobuf/ptypes/empty"

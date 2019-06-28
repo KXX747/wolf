@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"block-chain-server/internal/server/grpc"
-	"block-chain-server/internal/server/http"
-	"block-chain-server/internal/service"
+	"github.com/KXX747/wolf/public/block-chain-server/internal/server/grpc"
+	"github.com/KXX747/wolf/public/block-chain-server/internal/server/http"
+	"github.com/KXX747/wolf/public/block-chain-server/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 )

@@ -3,8 +3,8 @@ package http
 import (
 	"net/http"
 
-	"blockchain-getaway-servers/internal/model"
-	"blockchain-getaway-servers/internal/service"
+	"github.com/KXX747/wolf/getaway/blockchain-getaway-servers/internal/model"
+	"github.com/KXX747/wolf/getaway/blockchain-getaway-servers/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"

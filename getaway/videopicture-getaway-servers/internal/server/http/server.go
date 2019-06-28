@@ -3,8 +3,8 @@ package http
 import (
 	"net/http"
 
-	"videopicture-getaway-servers/internal/model"
-	"videopicture-getaway-servers/internal/service"
+	"github.com/KXX747/wolf/getaway/videopicture-getaway-servers/internal/model"
+	"github.com/KXX747/wolf/getaway/videopicture-getaway-servers/internal/service"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"

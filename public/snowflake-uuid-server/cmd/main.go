@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"snowflake-uuid-server/internal/server/grpc"
-	"snowflake-uuid-server/internal/server/http"
-	"snowflake-uuid-server/internal/service"
+	"github.com/KXX747/wolf/public/snowflake-uuid-server/internal/server/grpc"
+	"github.com/KXX747/wolf/public/snowflake-uuid-server/internal/server/http"
+	"github.com/KXX747/wolf/public/snowflake-uuid-server/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 )

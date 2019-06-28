@@ -8,8 +8,8 @@ import (
 	"syscall"
 	"time"
 
-	"videopicture-getaway-servers/internal/server/http"
-	"videopicture-getaway-servers/internal/service"
+	"github.com/KXX747/wolf/getaway/videopicture-getaway-servers/internal/server/http"
+	"github.com/KXX747/wolf/getaway/videopicture-getaway-servers/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 )

@@ -25,7 +25,7 @@
 
 
 export KRATOS_HOME="/Users/a747/go/src/github.com/bilibili/kratos"
-export KRATOS_DEMO="/Users/a747/go/src/github.com/KXX747/wolf/public/snowflake-uuid-server/api"
+export KRATOS_DEMO="/Users/a747/go/src/github.com/KXX747/wolf/public/vip-server/api"
 
 echo $KRATOS_HOME
 

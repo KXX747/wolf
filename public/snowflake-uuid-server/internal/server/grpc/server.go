@@ -1,8 +1,8 @@
 package grpc
 
 import (
-	pb "snowflake-uuid-server/api"
-	"snowflake-uuid-server/internal/service"
+	pb "github.com/KXX747/wolf/public/snowflake-uuid-server/api"
+	"github.com/KXX747/wolf/public/snowflake-uuid-server/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
 )

@@ -16,39 +16,60 @@ http_archive(
     sha256 = "3c681998538231a2d24d0c07ed5a7658cb72bfb5fd4bf9911157c0e9ac6a2687",
 )
 
-http_archive(
-    name="org_golang_x_tools",
-    urls=["https://github.com/golang/tools/archive/master.zip"],
-    sha256="258ad1e138ae70a990f5612bc04662856721e347d68b84a1e6d370265aa0d7e8",
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies","go_repository")
 
+go_repository(
+    name = "com_github_KXX747_wolf",
+    commit = "39ee1c966ad66d75df32c248bb5513d649113528",
+    importpath = "github.com/KXX747/wolf",
+    # urls = ["https://github.com/cespare/xxhash/archive/master.zip"],
+     #type = "zip",
 )
 
+go_repository(
+    name = "org_golang_x_tools",
+    #commit = "4adf7a708c2de4c9ea24a1f351c2e1c9b82fbde8",
+    importpath = "golang.org/x/tools",
+    urls = ["https://github.com/golang/tools/archive/master.zip"],
+    type = "zip",
+)
+
+go_repository(
+    name = "org_golang_x_sys",
+    #commit = "4adf7a708c2de4c9ea24a1f351c2e1c9b82fbde8",
+    importpath = "golang.org/x/sys",
+    urls = ["https://github.com/golang/sys/archive/master.zip"],
+    type = "zip",
+)
+
+go_repository(
+    name = "org_golang_x_text",
+    #commit = "4adf7a708c2de4c9ea24a1f351c2e1c9b82fbde8",
+    importpath = "golang.org/x/text",
+    urls = ["https://github.com/golang/text/archive/master.zip"],
+    type = "zip",
+)
+
+
+go_repository(
+    name = "org_golang_x_net",
+    #commit = "4adf7a708c2de4c9ea24a1f351c2e1c9b82fbde8",
+    importpath = "golang.org/x/net",
+    urls = ["https://github.com/golang/net/archive/master.zip"],
+    type = "zip",
+)
+
+
+
+
+gazelle_dependencies()
+
+
+
 load("@io_bazel_rules_go//go:deps.bzl", "go_rules_dependencies", "go_register_toolchains")
-
-#go_repository(
-#    name = "org_golang_x_tools",
-#    remote = "https://github.com/golang/tools"
-#)
-
-#go_repository(
-#    name = "com_google_protobuf",
-#    build_file_proto_mode = "disable_global",
-#    importpath = "github.com/google/protobuf",
-#    urls = ["http://bazel-cabin.bilibili.co/google/protobuf/48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"],
-#    strip_prefix = "protobuf-48cb18e5c419ddd23d9badcfe4e9df7bde1979b2",
-#    goype = "zip",
-#)
-#
-#go_repository(
-#    name = "org_golang_x_tools ",
-#    build_file_proto_mode = "disable_global",
-#    importpath = "github.com/golang/tools",
-#    urls = ["https://github.com/golang/tools/archive/master.zip"],
-#    type = "zip",
-#)
-
-
 go_rules_dependencies()
 go_register_toolchains()
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
-gazelle_dependencies()
+
+#load("//build:workspace.bzl", "bili_workspace")
+#bili_workspace()
+

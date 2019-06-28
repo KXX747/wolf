@@ -1,8 +1,8 @@
 package grpc
 
 import (
-	pb "video-picture-server/api"
-	"video-picture-server/internal/service"
+	pb "github.com/KXX747/wolf/public/video-picture-server/api"
+	"github.com/KXX747/wolf/public/video-picture-server/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
 )

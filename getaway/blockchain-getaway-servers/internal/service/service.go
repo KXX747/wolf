@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"blockchain-getaway-servers/internal/dao"
+	"github.com/KXX747/wolf/getaway/blockchain-getaway-servers/internal/dao"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 )
 

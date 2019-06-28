@@ -1,8 +1,8 @@
 package grpc
 
 import (
-	pb "job-server/api"
-	"job-server/internal/service"
+	pb "github.com/KXX747/wolf/public/job-server/api"
+	"github.com/KXX747/wolf/public/job-server/internal/service"
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
 )
