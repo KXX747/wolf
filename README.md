@@ -7,6 +7,8 @@ public  服务
 
 export GO111MODULE=on 
 go mod download
+go mod vendor 
+
 
 go get -u github.com/gogo/protobuf/protoc-gen-gofast
 
