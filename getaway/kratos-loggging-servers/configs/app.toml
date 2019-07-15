@@ -1,0 +1,36 @@
+
+# This is a TOML document. Boom~
+[base]
+
+[grpc]
+    addr = "0.0.0.0:38701"
+    timeout = "1s"
+
+[http]
+    addr = "0.0.0.0:38702"
+    timeout = "1s"
+
+[mysql]
+	addr = "192.168.57.110:18066"
+	dsn = "root:rootfabric@tcp(192.168.57.110:18066)/TESTDB?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8"
+	readDSN = ["root:rootfabric@tcp(192.168.57.110:18066)/TESTDB?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8"]
+	active = 20
+	idle = 10
+	idleTimeout ="4h"
+	queryTimeout = "200ms"
+	execTimeout = "300ms"
+	tranTimeout = "400ms"
+
+[redis]
+    name = "kratos-loggging-servers"
+	proto = "tcp"
+	addr = "192.168.57.136:19000"
+	idle = 10
+	active = 10
+	dialTimeout = "1s"
+	readTimeout = "1s"
+	writeTimeout = "1s"
+	idleTimeout = "10s"
+
+[expire]
+    redisExpire = "24h"
