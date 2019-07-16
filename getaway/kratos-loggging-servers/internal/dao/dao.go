@@ -29,6 +29,16 @@ type dao struct {
 	mcExpire    int32
 }
 
+//基础信息
+type BaseInfo struct {
+	Version 	string
+	Env			string
+	Token 		string
+	KeyId		string
+	Screet		string
+}
+
+
 
 var Conf =&Config{}
 
@@ -36,12 +46,16 @@ type ExpireConfig struct {
 	RedisExpire 	xtime.Duration
 }
 
+//
 type Config struct {
 	Grpc		    *warden.ServerConfig
 	Http 			*blademaster.ServerConfig
 	Mysql 			*sql.Config
 	Expire			*ExpireConfig
 	Redis   		*redis.Config
+	Base 			*BaseInfo
+	Log 			*log.Config
+
 }
 
 

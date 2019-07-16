@@ -13,6 +13,7 @@ import (
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 	"github.com/KXX747/wolf/getaway/kratos-loggging-servers/internal/dao"
+	"github.com/KXX747/wolf/getaway/kratos-loggging-servers/internal/server/unix"
 )
 
 func main() {
@@ -25,11 +26,15 @@ func main() {
 		return
 	}
 
-	log.Init(nil) // debug flag: log.dir={path}
+	g:=dao.Conf.Log.Agent
+	log.Info("Log  addr=%s  protol=%s timeout=%s",g.Addr,g.Network,g.Timeout)
+
+	log.Init(dao.Conf.Log) // debug flag: log.dir={path}
 	defer log.Close()
 	log.Info("kratos-loggging-servers start")
 	svc := service.New()
 	httpSrv := http.New(svc)
+	unix.NewUnix(svc)
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
 	for {

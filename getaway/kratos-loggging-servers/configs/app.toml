@@ -1,6 +1,11 @@
 
 # This is a TOML document. Boom~
 [base]
+    version="v1.0.0"
+    env="dev"
+    token=""
+    keyid=""
+    screet=""
 
 [grpc]
     addr = "0.0.0.0:38701"
@@ -34,3 +39,15 @@
 
 [expire]
     redisExpire = "24h"
+
+[log]
+    family = "app-log"
+    stdout=true
+    dir = "/Users/a747/Documents/logs/app-log"
+    [log.agent]
+        addr = "/tmp/app-log/unix_sock"
+        timeout = "1s"
+        network = "unix"
+
+
+
