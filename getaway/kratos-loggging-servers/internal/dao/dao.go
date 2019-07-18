@@ -12,6 +12,7 @@ import (
 	"github.com/bilibili/kratos/pkg/net/rpc/warden"
 	"github.com/bilibili/kratos/pkg/net/http/blademaster"
 	"github.com/BurntSushi/toml"
+	"github.com/bilibili/kratos/pkg/net/trace"
 )
 
 // Dao dao interface
@@ -55,7 +56,7 @@ type Config struct {
 	Redis   		*redis.Config
 	Base 			*BaseInfo
 	Log 			*log.Config
-
+	Tracer 			*trace.Config
 }
 
 

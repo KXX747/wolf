@@ -46,5 +46,6 @@ func howToStart(c *bm.Context) {
 	k := &model.Kratos{
 		Hello: "Golang 大法好 !!!",
 	}
+	log.Info("Golang 大法好 !!! ip=%s",c.Request.RemoteAddr)
 	c.JSON(k, nil)
 }

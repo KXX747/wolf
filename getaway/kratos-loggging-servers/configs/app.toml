@@ -45,9 +45,15 @@
     stdout=true
     dir = "/Users/a747/Documents/logs/app-log"
     [log.agent]
-        addr = "/tmp/app-log/unix_sock"
+        addr = "/tmp/log/unix_sock"
+#        addr = "/tmp/unix_sock"
         timeout = "1s"
         network = "unix"
 
-
-
+[tracer]
+     # addr = "192.168.57.134:16686"
+      addr = "/tmp/trace/unix_sock"
+      timeout = "30s"
+      network = "unix"
+      protocolVersion = 1
+      probability = 0.5
