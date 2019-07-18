@@ -173,16 +173,61 @@ tags:<key:"caller" >
 
 
  /**
- trace message=  version:1 operation_name:"Redis:GET" trace_id:371447714717446245 span_id:59246413122187365 parent_id:371447714717446245 start_time:<seconds:1563452880 nanos:704528000 > duration:<nanos:1994286 > tags:<key:"region" value:"region01" > tags:<key:"zone" value:"zone01" > tags:<key:"hostname" value:"747-2.local" > tags:<key:"ip" value:"192.168.1.101" > tags:<key:"span.kind" value:"client" > tags:<key:"span.kind" value:"client" > tags:<key:"component" value:"pkg/cache/redis" > tags:<key:"peer.service" value:"redis" > tags:<key:"peer.address" value:"192.168.57.136:19000" > tags:<key:"db.statement" value:"GET account:user:c7e760fb-19a0-43d2-9265-be863704c77a" >
+ trace message=
+ version:1 operation_name:"Redis:GET" trace_id:371447714717446245 span_id:59246413122187365
+ parent_id:371447714717446245 start_time:<seconds:1563452880 nanos:704528000 > duration:<nanos:1994286 >
+ tags:<key:"region" value:"region01" >
+ tags:<key:"zone" value:"zone01" >
+ tags:<key:"hostname" value:"747-2.local" >
+ tags:<key:"ip" value:"192.168.1.101" >
+ tags:<key:"span.kind" value:"client" >
+ tags:<key:"span.kind" value:"client" >
+ tags:<key:"component" value:"pkg/cache/redis" >
+ tags:<key:"peer.service" value:"redis" >
+ tags:<key:"peer.address" value:"192.168.57.136:19000" >
+ tags:<key:"db.statement" value:"GET account:user:c7e760fb-19a0-43d2-9265-be863704c77a" >
 
 
-trace message=  version:1 operation_name:"queryrow" trace_id:371447714717446245 span_id:8333405337253916773 parent_id:371447714717446245 start_time:<seconds:1563452880 nanos:706637000 > duration:<nanos:4588060 > tags:<key:"region" value:"region01" > tags:<key:"zone" value:"zone01" > tags:<key:"hostname" value:"747-2.local" > tags:<key:"ip" value:"192.168.1.101" > tags:<key:"span.kind" value:"client" > tags:<key:"legacy.address" value:"192.168.57.110:18066" > tags:<key:"legacy.comment" value:"select id,name,id_no,mobile,address,create_at,create_ip,create_by from user where id_no=? limit 1" >
+trace message=
+ version:1 operation_name:"queryrow" trace_id:371447714717446245 span_id:8333405337253916773
+ parent_id:371447714717446245 start_time:<seconds:1563452880 nanos:706637000 > duration:<nanos:4588060 >
+ tags:<key:"region" value:"region01" >
+ tags:<key:"zone" value:"zone01" >
+ tags:<key:"hostname" value:"747-2.local" >
+ tags:<key:"ip" value:"192.168.1.101" >
+ tags:<key:"span.kind" value:"client" >
+ tags:<key:"legacy.address" value:"192.168.57.110:18066" >
+ tags:<key:"legacy.comment" value:"select id,name,id_no,mobile,address,create_at,create_ip,create_by from user where id_no=? limit 1" >
 
 
-trace message=  version:1 operation_name:"Redis:SET" trace_id:371447714717446245 span_id:9165681080510787685 parent_id:371447714717446245 start_time:<seconds:1563452880 nanos:711411000 > duration:<nanos:973435 > tags:<key:"region" value:"region01" > tags:<key:"zone" value:"zone01" > tags:<key:"hostname" value:"747-2.local" > tags:<key:"ip" value:"192.168.1.101" > tags:<key:"span.kind" value:"client" > tags:<key:"span.kind" value:"client" > tags:<key:"component" value:"pkg/cache/redis" > tags:<key:"peer.service" value:"redis" > tags:<key:"peer.address" value:"192.168.57.136:19000" > tags:<key:"db.statement" value:"SET account:user:c7e760fb-19a0-43d2-9265-be863704c77a" >
+trace message=
+ version:1 operation_name:"Redis:SET" trace_id:371447714717446245 span_id:9165681080510787685
+ parent_id:371447714717446245 start_time:<seconds:1563452880 nanos:711411000 > duration:<nanos:973435 >
+ tags:<key:"region" value:"region01" >
+ tags:<key:"zone" value:"zone01" >
+ tags:<key:"hostname" value:"747-2.local" >
+ tags:<key:"ip" value:"192.168.1.101" >
+ tags:<key:"span.kind" value:"client" >
+ tags:<key:"span.kind" value:"client" >
+ tags:<key:"component" value:"pkg/cache/redis" >
+ tags:<key:"peer.service" value:"redis" >
+ tags:<key:"peer.address" value:"192.168.57.136:19000" >
+ tags:<key:"db.statement" value:"SET account:user:c7e760fb-19a0-43d2-9265-be863704c77a" >
 
 
-trace message=  version:1 operation_name:"/account.service.Users/FindUser" trace_id:371447714717446245 span_id:371447714717446245 start_time:<seconds:1563452880 nanos:703974000 > duration:<nanos:8685472 > tags:<key:"region" value:"region01" > tags:<key:"zone" value:"zone01" > tags:<key:"hostname" value:"747-2.local" > tags:<key:"ip" value:"192.168.1.101" > tags:<key:"span.kind" value:"server" > tags:<key:"component" value:"net/http" > tags:<key:"http.method" value:"GET" > tags:<key:"http.url" value:"/account.service.Users/FindUser?id_no=c7e760fb-19a0-43d2-9265-be863704c77a" > tags:<key:"span.kind" value:"server" > tags:<key:"caller" >
+trace message=
+ version:1 operation_name:"/account.service.Users/FindUser" trace_id:371447714717446245 span_id:371447714717446245
+ start_time:<seconds:1563452880 nanos:703974000 > duration:<nanos:8685472 >
+ tags:<key:"region" value:"region01" >
+ tags:<key:"zone" value:"zone01" >
+ tags:<key:"hostname" value:"747-2.local" >
+ tags:<key:"ip" value:"192.168.1.101" >
+ tags:<key:"span.kind" value:"server" >
+ tags:<key:"component" value:"net/http" >
+ tags:<key:"http.method" value:"GET" >
+ tags:<key:"http.url" value:"/account.service.Users/FindUser?id_no=c7e760fb-19a0-43d2-9265-be863704c77a" >
+ tags:<key:"span.kind" value:"server" >
+ tags:<key:"caller" >
 
 
   */
