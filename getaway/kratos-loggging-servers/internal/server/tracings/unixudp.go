@@ -145,7 +145,8 @@ tags:<key:"legacy.comment" value:"select id,name,id_no,mobile,address,create_at,
 
 opentracing上传服务器数据：
 version:1 operation_name:"Redis:SET" trace_id:4562668293271138332 span_id:6216402105785987100 parent_id:93271138332
-start_time:<seconds:1563434045 nanos:378213000 > duration:<nanos:818329 > tags:<key:"region" value:"region01" >
+start_time:<seconds:1563434045 nanos:378213000 > duration:<nanos:818329 >
+tags:<key:"region" value:"region01" >
 tags:<key:"zone" value:"zone01" >
 tags:<key:"hostname" value:"747-2.local" >
 tags:<key:"ip" value:"10.100.62.235" >
@@ -170,6 +171,14 @@ tags:<key:"http.url" value:"/account.service.Users/FindUser?id_no=c7e760fb-19a0-
 tags:<key:"span.kind" value:"server" >
 tags:<key:"caller" >
  */
+
+
+ //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
  /**
