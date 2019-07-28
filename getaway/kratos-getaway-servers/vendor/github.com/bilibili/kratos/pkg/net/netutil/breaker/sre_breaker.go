@@ -38,6 +38,7 @@ func newSRE(c *Config) Breaker {
 	}
 }
 
+//统计成功的次数和总次数
 func (b *sreBreaker) summary() (success int64, total int64) {
 	b.stat.Reduce(func(iterator metric.Iterator) float64 {
 		for iterator.Next() {
@@ -63,6 +64,7 @@ func (b *sreBreaker) Allow() error {
 		if atomic.LoadInt32(&b.state) == StateOpen {
 			atomic.CompareAndSwapInt32(&b.state, StateOpen, StateClosed)
 		}
+		//fmt.Println("满足。。。total=",total ,"     b.request=", b.request," k=",k)
 		return nil
 	}
 	if atomic.LoadInt32(&b.state) == StateClosed {
@@ -74,8 +76,10 @@ func (b *sreBreaker) Allow() error {
 		log.Info("breaker: drop ratio: %f, real rand: %f, drop: %v", dr, rr, dr > rr)
 	}
 	if dr <= rr {
+		//fmt.Println("满足。。。dr=",dr," rr=",rr)
 		return nil
 	}
+
 	return ecode.ServiceUnavailable
 }
 

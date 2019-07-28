@@ -2,14 +2,11 @@ package service
 
 import (
 	"context"
-
 	"github.com/KXX747/wolf/getaway/kratos-getaway-servers/internal/dao"
-	"github.com/bilibili/kratos/pkg/conf/paladin"
 )
 
 // Service service.
 type Service struct {
-	ac  *paladin.Map
 	dao dao.Dao
 	AppConfig *dao.Config
 }

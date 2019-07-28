@@ -3,6 +3,7 @@ package warden
 import (
 	"context"
 	"fmt"
+	"github.com/bilibili/kratos/pkg/net/rpc/warden/balancer/wrr"
 	"net/url"
 	"os"
 	"strconv"
@@ -16,7 +17,6 @@ import (
 	"github.com/bilibili/kratos/pkg/naming"
 	nmd "github.com/bilibili/kratos/pkg/net/metadata"
 	"github.com/bilibili/kratos/pkg/net/netutil/breaker"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden/balancer/p2c"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden/internal/status"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver/direct"
@@ -164,7 +164,8 @@ func NewClient(conf *ClientConfig, opt ...grpc.DialOption) *Client {
 	if err := c.SetConfig(conf); err != nil {
 		panic(err)
 	}
-	c.UseOpt(grpc.WithBalancerName(p2c.Name))
+	//c.UseOpt(grpc.WithBalancerName(p2c.Name))
+	c.UseOpt(grpc.WithBalancerName(wrr.Name))
 	c.UseOpt(opt...)
 	c.Use(c.recovery(), clientLogging(), c.handle())
 	return c

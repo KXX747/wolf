@@ -3,7 +3,10 @@
 // And it will cache all the objects to reduce the creation of object.
 package group
 
-import "sync"
+import(
+	"sync"
+
+)
 
 // Group is a lazy load container.
 type Group struct {

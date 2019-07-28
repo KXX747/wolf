@@ -127,6 +127,7 @@ type Stmt struct {
 func Open(c *Config) (*DB, error) {
 	db := new(DB)
 	d, err := connect(c, c.DSN)
+	//fmt.Println("Open d, err := connect(c =",c,", c.DSN) =",c.DSN)
 	if err != nil {
 		return nil, err
 	}
@@ -136,6 +137,7 @@ func Open(c *Config) (*DB, error) {
 	rs := make([]*conn, 0, len(c.ReadDSN))
 	for _, rd := range c.ReadDSN {
 		d, err := connect(c, rd)
+		//fmt.Println("c.ReadDSN d, err := connect(c =",c,", c.DSN) =",rd)
 		if err != nil {
 			return nil, err
 		}

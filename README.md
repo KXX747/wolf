@@ -9,6 +9,9 @@ export GO111MODULE=on
 go mod download
 go mod vendor 
 
+//添加库
+go mod edit -require=github.com/pkg/sftp@v1.10.0
+
 
 go get -u github.com/gogo/protobuf/protoc-gen-gofast
 

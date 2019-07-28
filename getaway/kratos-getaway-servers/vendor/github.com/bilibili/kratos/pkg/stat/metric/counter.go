@@ -7,6 +7,16 @@ import (
 
 var _ Metric = &counter{}
 
+/**
+Counter
+
+Counter用于累计值，例如记录请求次数、任务完成数、错误发生次数。一直增加，不会减少。重启进程后，会被重置。
+
+例如：http_response_total{method=”GET”,endpoint=”/api/tracks”}
+100，10秒后抓取http_response_total{method=”GET”,endpoint=”/api/tracks”} 100。
+https://studygolang.com/articles/12874
+https://blog.csdn.net/wuxiaobingandbob/article/details/78954406
+ */
 // Counter stores a numerical value that only ever goes up.
 type Counter interface {
 	Metric

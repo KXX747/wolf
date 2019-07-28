@@ -1,6 +1,8 @@
 package metric
 
-import "time"
+import (
+	"time"
+)
 
 var _ Metric = &rollingGauge{}
 var _ Aggregation = &rollingGauge{}
@@ -35,6 +37,7 @@ func NewRollingGauge(opts RollingGaugeOpts) RollingGauge {
 
 func (r *rollingGauge) Add(val int64) {
 	r.policy.Append(float64(val))
+	//fmt.Println(r.policy)
 }
 
 func (r *rollingGauge) Reduce(f func(Iterator) float64) float64 {

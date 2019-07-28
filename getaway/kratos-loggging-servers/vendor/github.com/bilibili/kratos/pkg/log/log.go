@@ -42,6 +42,9 @@ type Config struct {
 	Module map[string]int32
 	// Filter tell log handler which field are sensitive message, use * instead.
 	Filter []string
+
+	//log-agnet
+	Agent *AgentLogConfig
 }
 
 // errProm prometheus error counter.
@@ -132,6 +135,12 @@ func Init(conf *Config) {
 	if conf.Dir != "" {
 		hs = append(hs, NewFile(conf.Dir, conf.FileBufferSize, conf.RotateSize, conf.MaxLogFile))
 	}
+
+	// when env is not dev
+	if !_noagent && (conf != nil || (isNil && env.DeployEnv != "" && env.DeployEnv != env.DeployEnvDev)) {
+		hs = append(hs,NewLogAgent(conf.Agent))
+	}
+
 	h = newHandlers(conf.Filter, hs...)
 	c = conf
 }

@@ -1,0 +1,5 @@
+bool = true
+int = 100
+float = 100.1
+string = "text"
+strings = ["a", "b", "c"]

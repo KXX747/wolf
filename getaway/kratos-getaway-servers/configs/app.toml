@@ -6,13 +6,8 @@
     token=""
     keyid=""
     screet=""
-
-[grpc]
-    addr = "0.0.0.0:38791"
-    timeout = "1s"
-
 [http]
-    addr = "0.0.0.0:38790"
+    addr = "0.0.0.0:38705"
     timeout = "1s"
 
 [mysql]

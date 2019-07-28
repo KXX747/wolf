@@ -3,4 +3,4 @@ cd cmd
 
 go build
 
- ./cmd -conf ./../configs/
+./cmd -conf ./../configs/

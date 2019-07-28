@@ -36,7 +36,7 @@ func ExampleClient() {
 	}
 	var (
 		ec   exampleConf
-		eo   exampleConf
+		eo   `exampleConf`
 		m    paladin.TOML
 		strs []string
 	)
