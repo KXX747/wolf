@@ -31,13 +31,12 @@ const(
  */
 func NewUser(c *blademaster.Context)  {
 
-
 	mAddUserReq:=new(account_service.AddUserReq)
 	if err := c.Bind(mAddUserReq); err != nil {
 		c.JSON(nil,  ecode.ReqParamErr)
 		return
 	}
-	if reply,code:=userServer.AddUserDao(c,mAddUserReq);code!=nil {
+	if reply,code:=userRPCServer.AddUserDao(c,mAddUserReq);code!=nil {
 		c.JSON(nil, code)
 		return
 	}else {
@@ -55,7 +54,7 @@ func UpdateUser(c *blademaster.Context)  {
 		c.JSON(nil,  ecode.ReqParamErr)
 		return
 	}
-	if reply,code:=userServer.UpdateUserDao(c,mUpdateUserReq);code!=nil {
+	if reply,code:=userRPCServer.UpdateUserDao(c,mUpdateUserReq);code!=nil {
 		c.JSON(nil, code)
 		return
 	}else {
@@ -73,7 +72,7 @@ func DeleteUser(c *blademaster.Context)  {
 		return
 	}
 
-	if reply,code:=userServer.DeleteUserDao(c,mDeleteUserReq);code!=nil {
+	if reply,code:=userRPCServer.DeleteUserDao(c,mDeleteUserReq);code!=nil {
 		c.JSON(nil, code)
 		return
 	}else {
@@ -94,7 +93,7 @@ func FindUserByIdNo(c *blademaster.Context)  {
 		return
 	}
 
-	if reply,code:=userServer.FindUserDao(c,mFindUserReq);code!=nil {
+	if reply,code:=userRPCServer.FindUserDao(c,mFindUserReq);code!=nil {
 		c.JSON(nil, code)
 		return
 	}else {
@@ -113,7 +112,7 @@ func FindUserListByIdNo(c *blademaster.Context)  {
 		c.JSON(nil,  ecode.ReqParamErr)
 		return
 	}
-	if reply,code:=userServer.FindUserListDao(c,mFindUserReq);code!=nil {
+	if reply,code:=userRPCServer.FindUserListDao(c,mFindUserReq);code!=nil {
 		c.JSON(nil, code)
 		return
 	}else {
@@ -133,7 +132,7 @@ func UpdateCommonUser(c *blademaster.Context)  {
 		c.JSON(nil,  ecode.ReqParamErr)
 		return
 	}
-	if reply,code:=userServer.UpdateUserCommon(c,mUserCommon);code!=nil {
+	if reply,code:=userRPCServer.UpdateUserCommon(c,mUserCommon);code!=nil {
 		c.JSON(nil, code)
 		return
 	}else {
@@ -154,7 +153,7 @@ func FindCommonUserByIdNo(c *blademaster.Context)  {
 		c.JSON(nil,  ecode.ReqParamErr)
 		return
 	}
-	if reply,code:=userServer.FindUserCommon(c,mUserCommonReq);code!=nil {
+	if reply,code:=userRPCServer.FindUserCommon(c,mUserCommonReq);code!=nil {
 		c.JSON(nil, code)
 		return
 	}else {
@@ -163,16 +162,3 @@ func FindCommonUserByIdNo(c *blademaster.Context)  {
 
 }
 
-
-
-
-/**
-一是 Request Body 就是整个文件内容，通过请求头（即 Header ）中的 Content-Type 字段来指定文件类型。
-二是用 multipart 表单方式来上传
-*/
-//上传信息照片
-func updatecard(c *blademaster.Context) {
-
-
-
-}

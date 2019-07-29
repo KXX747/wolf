@@ -15,7 +15,7 @@
     secret = "1111122222"
     dial      = "500ms"
     timeout   = "2s"
-    keepAlive = "60s"
+    keepAlive = "30s"
     timer = 10
     [userHttpClient.breaker]
         window  = "10s"
@@ -24,9 +24,12 @@
         ratio   = 0.5
         request = 100
 
+
 [rpcClient2]
     [rpcClient2.user]
         timeout = "1s"
+     [rpcClient2.stream]
+            timeout = "1s"
 
 [mysql]
 	addr = "192.168.57.110:18066"

@@ -46,8 +46,6 @@ func NewUserCommonClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (acc
 
 
 
-
-
 //user rpc client
 func NewUserServer(cfg *warden.ClientConfig) (mUserServer *UserServer){
 	userRPCClient,err := NewClient(cfg)
@@ -101,6 +99,7 @@ func(service *UserServer)DeleteUserDao(ctx context.Context,mDeleteUserReq *accou
 
 		return nil,err
 	}
+
 
 	return
 }

@@ -1,6 +1,10 @@
 package http
 
-import "github.com/bilibili/kratos/pkg/net/http/blademaster"
+import (
+	pb "github.com/KXX747/wolf/getaway/kratos-getaway-servers/api/stream_server"
+	"github.com/bilibili/kratos/pkg/net/http/blademaster"
+	"github.com/bilibili/kratos/pkg/ecode"
+)
 
 /**
 图片视频接口
@@ -22,6 +26,37 @@ const (
 
 //上传stream文件
 func UploadFile(c *blademaster.Context)  {
+	mUploadFileReq:=new(pb.UploadFileReq)
+	if err := c.Bind(mUploadFileReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+	if reply,code:=streamRPCClient.File(c,mUploadFileReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
+
+
+}
+
+//添加用户名下指定视频的评价
+func NewFileAllevalbyVid(c *blademaster.Context)  {
+
+	mEvaluationVodieReq:=new(pb.EvaluationVodieReq)
+	if err := c.Bind(mEvaluationVodieReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+
+	if reply,code:=streamRPCClient.Addevaluation(c,mEvaluationVodieReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
+
 
 }
 
@@ -29,14 +64,37 @@ func UploadFile(c *blademaster.Context)  {
 //查询用户名下所有视频
 func FindListFileByIdNo(c *blademaster.Context)  {
 
+	mFileListReq:=new(pb.FileListReq)
+	if err := c.Bind(mFileListReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+
+	if reply,code:=streamRPCClient.Listfile(c,mFileListReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
+
 }
 
 //查询用户名下指定视频的所有评价
 func FindFileAllevalbyVid(c *blademaster.Context)  {
 
+	mEvaluationGetReq:=new(pb.EvaluationGetReq)
+	if err := c.Bind(mEvaluationGetReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+
+	if reply,code:=streamRPCClient.Fileallevalby(c,mEvaluationGetReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
+
 }
 
-//添加用户名下指定视频的评价
-func NewFileAllevalbyVid(c *blademaster.Context)  {
 
-}

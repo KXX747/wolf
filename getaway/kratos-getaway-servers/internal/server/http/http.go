@@ -9,7 +9,9 @@ import (
 
 var (
 	svc *service.Service
-	userServer * client.UserServer
+	userRPCServer *client.UserServer
+	userHttpClient  *bm.Client
+	streamRPCClient  *client.StreamServer
 )
 
 // New new a bm server.
@@ -70,7 +72,11 @@ func initRouter(e *bm.Engine) {
 
 //grpc client
 func initServer(s *service.Service)  {
-	userServer=client.NewUserServer(s.AppConfig.RPCClient2.User)
+	userRPCServer=client.NewUserServer(s.AppConfig.RPCClient2.User)
+	userHttpClient =bm.NewClient(s.AppConfig.UserHttpClient)
+	//
+	streamRPCClient=client.NewStreamServer(s.AppConfig.RPCClient2.Stream)
+
 
 }
 

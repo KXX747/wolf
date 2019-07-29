@@ -4,6 +4,7 @@ package log
 "unix", "unixgram", "unixpacket":
  */
 import (
+	"fmt"
 	xtime "github.com/bilibili/kratos/pkg/time"
 	"sync"
 	"context"
@@ -11,8 +12,7 @@ import (
 	"net"
 	"time"
 	"strconv"
-	"fmt"
-	"log"
+	//"log"
 	"github.com/bilibili/kratos/pkg/net/trace"
 	"github.com/bilibili/kratos/pkg/net/metadata"
 )
@@ -159,7 +159,7 @@ func(agent *HandlerAgentLog)writeToServer()  {
 	for  {
 		select {
 		case p :=<- agent.ChanLogs:
-			log.Println(" agent.ChanLogs p=%s ",buf.Len())
+			//log.Println(" agent.ChanLogs p=%s ",buf.Len())
 			if p==nil {
 				quit=true
 				goto NEW
@@ -174,14 +174,14 @@ func(agent *HandlerAgentLog)writeToServer()  {
 			if conn != nil&&buf.Len()>=MinLogContent {
 				//上传日志
 				go func(conn  *net.UnixConn,buffer *core.Buffer) {
-					log.Printf("客户端收集的数据。。。",string(buf.Bytes()))
+					//log.Printf("客户端收集的数据。。。",string(buf.Bytes()))
 					if _,err=conn.Write(buf.Bytes());err!=nil {
-						log.Printf("conn.Write err=%s buf=%f",err,buf.Len())
+						//log.Printf("conn.Write err=%s buf=%f",err,buf.Len())
 						conn.Close()
-						log.Printf("上传日志失败。。。")
+						//log.Printf("上传日志失败。。。")
 					}else {
 						buf.Reset()
-						log.Printf("上传日志成功。。。")
+					//	log.Printf("上传日志成功。。。")
 					}
 				}(conn,buf)
 			}
@@ -193,7 +193,7 @@ func(agent *HandlerAgentLog)writeToServer()  {
 		conf :=agent.Config
 		unixAddr, _ := net.ResolveUnixAddr(conf.Network, conf.Addr)
 		if conn, err = net.DialUnix(conf.Network, nil, unixAddr);err!=nil{
-			log.Printf("net.DialUnix err=%s addr=%s network=%s",err,conf.Addr,conf.Network)
+			//log.Printf("net.DialUnix err=%s addr=%s network=%s",err,conf.Addr,conf.Network)
 			continue
 		}
 		//fmt.Println("。。。。。。。。。")
@@ -201,14 +201,14 @@ func(agent *HandlerAgentLog)writeToServer()  {
 
 	NEW:
 		if conn != nil &&buf.Len()>0{
-			fmt.Println("客户端收集的数据。。。",string(buf.Bytes()))
+			//fmt.Println("客户端收集的数据。。。",string(buf.Bytes()))
 			if _,err=conn.Write(buf.Bytes());err!=nil {
-				log.Printf("conn.Write err=%s buf=%f",err,buf.Len())
+				//log.Printf("conn.Write err=%s buf=%f",err,buf.Len())
 				conn.Close()
-				log.Printf("上传日志失败。。。")
+			//	log.Printf("上传日志失败。。。")
 			}else {
 				buf.Reset()
-				log.Printf("上传日志成功。。。")
+			//	log.Printf("上传日志成功。。。")
 			}
 
 		}
