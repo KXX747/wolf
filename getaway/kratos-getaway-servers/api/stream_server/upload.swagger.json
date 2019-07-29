@@ -1,0 +1,580 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "upload.proto",
+        "version": "1"
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/stream.server.v1.Token/new": {
+            "post": {
+                "summary": "Request for a token for upload.",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.stream.server.v1.NewTokenResp"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/.stream.server.v1.NewTokenReq"
+                        }
+                    }
+                ],
+                "tags": [
+                    "stream.server.v1.Token"
+                ]
+            }
+        },
+        "/stream.server.v1.Upload/addevaluation": {
+            "get": {
+                "summary": "添加视频的评价",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.stream.server.v1.EvaluationVodieResp"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id_no",
+                        "description": "视频的上传着用户id",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "e_idno",
+                        "description": "评价人的用户id",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "e_name",
+                        "description": "评价人的姓名",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "e_content",
+                        "description": "评价内容",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "vid",
+                        "description": "评价的视频",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "n_eid",
+                        "description": "关联的评价id，neid不存在时，改评价为父评价",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "stream.server.v1.Upload"
+                ]
+            }
+        },
+        "/stream.server.v1.Upload/file": {
+            "post": {
+                "summary": "/stream.server.v1.Upload/file",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.stream.server.v1.UploadFileResp"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/.stream.server.v1.UploadFileReq"
+                        }
+                    }
+                ],
+                "tags": [
+                    "stream.server.v1.Upload"
+                ]
+            }
+        },
+        "/stream.server.v1.Upload/fileallevalby": {
+            "get": {
+                "summary": "获取视频所有评价",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.stream.server.v1.EvaluationListByVodieResp"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "neid",
+                        "description": "评价的neid，判断是否指向下一个评价，指向就是回复",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "vid",
+                        "description": "获取指定视频的评价",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_pos",
+                        "description": "评价的的起点",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "end_pos",
+                        "description": "评价的结束位置",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "stream.server.v1.Upload"
+                ]
+            }
+        },
+        "/stream.server.v1.Upload/listfile": {
+            "get": {
+                "summary": "获取指定视频",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.stream.server.v1.FileListResp"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id_no",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_pos",
+                        "description": "分页起点",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "end_pos",
+                        "description": "分页结束位置",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "stream.server.v1.Upload"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        ".stream.server.v1.EvaluationGetReq": {
+            "type": "object",
+            "properties": {
+                "neid": {
+                    "type": "string",
+                    "description": "评价的neid，判断是否指向下一个评价，指向就是回复"
+                },
+                "vid": {
+                    "type": "string",
+                    "description": "获取指定视频的评价"
+                },
+                "start_pos": {
+                    "type": "integer",
+                    "description": "评价的的起点"
+                },
+                "end_pos": {
+                    "type": "integer",
+                    "description": "评价的结束位置"
+                }
+            },
+            "description": "获取指定指定评价视频",
+            "required": [
+                "vid"
+            ]
+        },
+        ".stream.server.v1.EvaluationListByVodieResp": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.stream.server.v1.EvaluationVodieResp"
+                    },
+                    "description": "repeated表示可重复 []results"
+                }
+            },
+            "description": "视频的评价或者回复列表"
+        },
+        ".stream.server.v1.EvaluationVodieReq": {
+            "type": "object",
+            "properties": {
+                "id_no": {
+                    "type": "string",
+                    "description": "视频的上传着用户id"
+                },
+                "e_idno": {
+                    "type": "string",
+                    "description": "评价人的用户id"
+                },
+                "e_name": {
+                    "type": "string",
+                    "description": "评价人的姓名"
+                },
+                "e_content": {
+                    "type": "string",
+                    "description": "评价内容"
+                },
+                "vid": {
+                    "type": "string",
+                    "description": "评价的视频"
+                },
+                "n_eid": {
+                    "type": "string",
+                    "description": "关联的评价id，neid不存在时，改评价为父评价"
+                }
+            },
+            "description": "添加评价视频",
+            "required": [
+                "id_no",
+                "e_idno",
+                "e_name",
+                "e_content",
+                "vid"
+            ]
+        },
+        ".stream.server.v1.EvaluationVodieResp": {
+            "type": "object",
+            "properties": {
+                "id_no": {
+                    "type": "string",
+                    "description": "视频的上传着用户id"
+                },
+                "e_idno": {
+                    "type": "string",
+                    "description": "评价人的用户id"
+                },
+                "e_name": {
+                    "type": "string",
+                    "description": "评价人的姓名"
+                },
+                "e_content": {
+                    "type": "string",
+                    "description": "评价内容"
+                },
+                "vid": {
+                    "type": "string",
+                    "description": "视频唯一id"
+                },
+                "eid": {
+                    "type": "string",
+                    "description": "评价内容id"
+                },
+                "create_at": {
+                    "type": "string",
+                    "description": "评价创建时间"
+                },
+                "create_ip": {
+                    "type": "string",
+                    "description": "评价创建ip"
+                },
+                "n_eid": {
+                    "type": "string",
+                    "description": "评价的父id"
+                }
+            },
+            "description": "返回评价视频内容",
+            "required": [
+                "id_no",
+                "e_idno",
+                "e_name",
+                "e_content",
+                "vid",
+                "eid",
+                "create_at",
+                "create_ip",
+                "n_eid"
+            ]
+        },
+        ".stream.server.v1.FileListReq": {
+            "type": "object",
+            "properties": {
+                "id_no": {
+                    "type": "string"
+                },
+                "start_pos": {
+                    "type": "integer",
+                    "description": "分页起点"
+                },
+                "end_pos": {
+                    "type": "integer",
+                    "description": "分页结束位置"
+                }
+            },
+            "description": "获取用户的所有视频列表",
+            "required": [
+                "id_no"
+            ]
+        },
+        ".stream.server.v1.FileListResp": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.stream.server.v1.UploadFileResp"
+                    },
+                    "description": "repeated表示可重复 []results"
+                }
+            },
+            "description": "返回用户的所有视频列表"
+        },
+        ".stream.server.v1.NewTokenReq": {
+            "type": "object",
+            "properties": {
+                "bucket": {
+                    "type": "string",
+                    "description": "上传到 BFS 的 bucket"
+                },
+                "dir": {
+                    "type": "string",
+                    "description": "上传到指定的 BFS 目录（可以用来区分业务）"
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "操作人（mlive通过dashboard授权获取到的操作人）"
+                }
+            },
+            "required": [
+                "bucket",
+                "operator"
+            ]
+        },
+        ".stream.server.v1.NewTokenResp": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "description": "授予的 token"
+                }
+            }
+        },
+        ".stream.server.v1.UploadFileReq": {
+            "type": "object",
+            "properties": {
+                "id_no": {
+                    "type": "string",
+                    "description": "上传的用户id"
+                },
+                "dir": {
+                    "type": "string",
+                    "description": "上传到指定的 BFS 目录（可以用来区分业务）"
+                },
+                "file_name": {
+                    "type": "string",
+                    "description": "上传的到bfs的文件名（存储在bfs的文件名，不传bfs会根据文件的sha1值生成并返回）"
+                },
+                "content_type": {
+                    "type": "string",
+                    "description": "上传的文件的类型（不指定时会自动检测文件类型）"
+                },
+                "wm_key": {
+                    "type": "string",
+                    "description": "图片水印key，添加图片水印需要上传该参数, 新业务需要提前向bfs申请"
+                },
+                "wm_text": {
+                    "type": "string",
+                    "description": "文字水印，限制不超过20个字符"
+                },
+                "wm_padding_x": {
+                    "type": "integer",
+                    "description": "水印位置右下角 到原图右下角 水平距离，默认10px"
+                },
+                "wm_padding_y": {
+                    "type": "integer",
+                    "description": "水印位置右下角 到原图右下角 垂直距离，默认10px"
+                },
+                "wm_scale": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "水印宽度占原图高度的比例(0,1) （只支持按照宽度压缩)，默认值: 0.035"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "视频tag"
+                }
+            },
+            "description": "The file/data part must use Request.FormFile() to retrieve manually.",
+            "required": [
+                "id_no",
+                "file_name",
+                "content_type",
+                "tag"
+            ]
+        },
+        ".stream.server.v1.UploadFileResp": {
+            "type": "object",
+            "properties": {
+                "id_no": {
+                    "type": "string",
+                    "description": "上传的用户id"
+                },
+                "dir": {
+                    "type": "string",
+                    "description": "上传到指定的 BFS 目录（可以用来区分业务）"
+                },
+                "file_name": {
+                    "type": "string",
+                    "description": "上传的到bfs的文件名（存储在bfs的文件名，不传bfs会根据文件的sha1值生成并返回）"
+                },
+                "content_type": {
+                    "type": "string",
+                    "description": "上传的文件的类型（不指定时会自动检测文件类型）"
+                },
+                "wm_key": {
+                    "type": "string",
+                    "description": "图片水印key，添加图片水印需要上传该参数, 新业务需要提前向bfs申请"
+                },
+                "wm_text": {
+                    "type": "string",
+                    "description": "文字水印，限制不超过20个字符"
+                },
+                "wm_padding_x": {
+                    "type": "integer",
+                    "description": "水印位置右下角 到原图右下角 水平距离，默认10px"
+                },
+                "wm_padding_y": {
+                    "type": "integer",
+                    "description": "水印位置右下角 到原图右下角 垂直距离，默认10px"
+                },
+                "wm_scale": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "水印宽度占原图高度的比例(0,1) （只支持按照宽度压缩)，默认值: 0.035"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "视频tag"
+                },
+                "vid": {
+                    "type": "string",
+                    "description": "视频vid"
+                },
+                "create_at": {
+                    "type": "string",
+                    "description": "创建时间"
+                },
+                "create_ip": {
+                    "type": "string",
+                    "description": "创建ip"
+                },
+                "hash": {
+                    "type": "string",
+                    "description": "文件hash"
+                }
+            },
+            "description": "视频信息"
+        }
+    }
+}

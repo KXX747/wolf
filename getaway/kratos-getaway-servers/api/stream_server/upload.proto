@@ -1,0 +1,192 @@
+syntax = "proto3";
+package stream.server.v1;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+service Token {
+	// Request for a token for upload.
+	// `method:"POST" internal:"true"`
+	rpc new (NewTokenReq) returns (NewTokenResp);
+}
+
+service Upload {
+	// `method:"POST" content-type:"multipart/form-data" midware:"cors,guest"`
+	rpc file (UploadFileReq) returns (UploadFileResp);
+	//添加视频的评价
+	rpc addevaluation(EvaluationVodieReq) returns (EvaluationVodieResp);
+	//获取视频所有评价
+	rpc fileallevalby(EvaluationGetReq) returns (EvaluationListByVodieResp);
+    //获取指定视频
+    rpc listfile(FileListReq)returns(FileListResp);
+}
+
+message NewTokenReq {
+	// 上传到 BFS 的 bucket
+	string bucket = 1 [(gogoproto.moretags) = 'form:"bucket" validate:"required"'];
+
+	// 上传到指定的 BFS 目录（可以用来区分业务）
+	string dir = 2 [(gogoproto.moretags) = 'form:"dir"'];
+
+	// 操作人（mlive通过dashboard授权获取到的操作人）
+	string operator = 3 [(gogoproto.moretags) = 'form:"operator" validate:"required"'];
+}
+
+message NewTokenResp {
+	// 授予的 token
+	string token = 1 [(gogoproto.jsontag) = "token"];
+}
+
+// The file/data part must use Request.FormFile() to retrieve manually.
+message UploadFileReq {
+	// 上传的用户id
+	string idno = 1 [(gogoproto.moretags) = 'form:"id_no" validate:"required"'];
+
+	// 上传到指定的 BFS 目录（可以用来区分业务）
+	string dir = 2 [(gogoproto.moretags) = 'form:"dir"'];
+
+	// 上传的到bfs的文件名（存储在bfs的文件名，不传bfs会根据文件的sha1值生成并返回）
+	string filename = 3 [(gogoproto.moretags) = 'form:"file_name" validate:"required"'];
+
+	// 上传的文件的类型（不指定时会自动检测文件类型）
+	string contentType = 4 [(gogoproto.moretags) = 'form:"content_type" validate:"required"'];
+
+	// 图片水印key，添加图片水印需要上传该参数, 新业务需要提前向bfs申请
+	string wmKey = 5 [(gogoproto.moretags) = 'form:"wm_key"'];
+
+	// 文字水印，限制不超过20个字符
+	string wmText = 6 [(gogoproto.moretags) = 'form:"wm_text"'];
+
+	// 水印位置右下角 到原图右下角 水平距离，默认10px
+	uint32 wmPaddingX = 7 [(gogoproto.moretags) = 'form:"wm_padding_x"'];
+
+	// 水印位置右下角 到原图右下角 垂直距离，默认10px
+	uint32 wmPaddingY = 8 [(gogoproto.moretags) = 'form:"wm_padding_y"'];
+
+	// 水印宽度占原图高度的比例(0,1) （只支持按照宽度压缩)，默认值: 0.035
+	double wmScale = 9 [(gogoproto.moretags) = 'form:"wm_scale"'];
+
+    //视频tag
+    string tag =10 [(gogoproto.moretags) = 'form:"tag" validate:"required"'];
+
+
+}
+
+//视频信息
+message UploadFileResp {
+// 上传的用户id
+	string idno = 1 [(gogoproto.moretags) = 'form:"id_no"'];
+
+	// 上传到指定的 BFS 目录（可以用来区分业务）
+	string dir = 2 [(gogoproto.moretags) = 'form:"dir"'];
+
+	// 上传的到bfs的文件名（存储在bfs的文件名，不传bfs会根据文件的sha1值生成并返回）
+	string filename = 3 [(gogoproto.moretags) = 'form:"file_name"'];
+
+	// 上传的文件的类型（不指定时会自动检测文件类型）
+	string contentType = 4 [(gogoproto.moretags) = 'form:"content_type"'];
+
+	// 图片水印key，添加图片水印需要上传该参数, 新业务需要提前向bfs申请
+	string wmKey = 5 [(gogoproto.moretags) = 'form:"wm_key"'];
+
+	// 文字水印，限制不超过20个字符
+	string wmText = 6 [(gogoproto.moretags) = 'form:"wm_text"'];
+
+	// 水印位置右下角 到原图右下角 水平距离，默认10px
+	uint32 wmPaddingX = 7 [(gogoproto.moretags) = 'form:"wm_padding_x"'];
+
+	// 水印位置右下角 到原图右下角 垂直距离，默认10px
+	uint32 wmPaddingY = 8 [(gogoproto.moretags) = 'form:"wm_padding_y"'];
+
+	// 水印宽度占原图高度的比例(0,1) （只支持按照宽度压缩)，默认值: 0.035
+	double wmScale = 9 [(gogoproto.moretags) = 'form:"wm_scale"'];
+
+    //视频tag
+    string tag =10 [(gogoproto.moretags) = 'form:"tag"'];
+
+    //视频vid
+    string vid =11 [(gogoproto.moretags) = 'form:"vid"'];
+    //创建时间
+    string createat = 12 [(gogoproto.moretags) = 'form:"create_at"'];
+    //创建ip
+    string createip = 13 [(gogoproto.moretags) = 'form:"create_ip"'];
+
+     //文件hash
+     string hash = 14 [(gogoproto.moretags) = 'form:"hash"'];
+}
+
+
+//添加评价视频
+message EvaluationVodieReq{
+    //视频的上传着用户id
+    string idno = 1 [(gogoproto.moretags) = 'form:"id_no" validate:"required"'];
+    //评价人的用户id
+    string eidno = 2 [(gogoproto.moretags) = 'form:"e_idno" validate:"required"'];
+    //评价人的姓名
+    string ename = 3 [(gogoproto.moretags) = 'form:"e_name" validate:"required"'];
+    //评价内容
+    string econtent = 4 [(gogoproto.moretags) = 'form:"e_content" validate:"required"'];
+    //评价的视频
+    string vid = 5 [(gogoproto.moretags) = 'form:"vid" validate:"required"'];
+    //关联的评价id，neid不存在时，改评价为父评价
+    string neid =6 [(gogoproto.moretags) = 'form:"n_eid" '];
+}
+
+//获取指定指定评价视频
+message EvaluationGetReq{
+     //评价的neid，判断是否指向下一个评价，指向就是回复
+     string neid = 1 [(gogoproto.moretags) = 'form:"neid" '];
+     //获取指定视频的评价
+     string vid = 2 [(gogoproto.moretags) = 'form:"vid" validate:"required"'];
+     //评价的的起点
+     int32 startPos=3 [(gogoproto.moretags) = 'form:"start_pos"'];
+     //评价的结束位置
+     int32 endPos=4 [(gogoproto.moretags) = 'form:"end_pos"'];
+
+
+}
+
+//返回评价视频内容
+message EvaluationVodieResp{
+    //视频的上传着用户id
+    string idno = 1 [(gogoproto.moretags) = 'form:"id_no" validate:"required"'];
+    //评价人的用户id
+    string eidno = 2 [(gogoproto.moretags) = 'form:"e_idno" validate:"required"'];
+    //评价人的姓名
+    string ename = 3 [(gogoproto.moretags) = 'form:"e_name" validate:"required"'];
+    //评价内容
+    string econtent = 4 [(gogoproto.moretags) = 'form:"e_content" validate:"required"'];
+    //视频唯一id
+    string vid = 5 [(gogoproto.moretags) = 'form:"vid" validate:"required"'];
+    //评价内容id
+    string eid = 6 [(gogoproto.moretags) = 'form:"eid" validate:"required"'];
+    //评价创建时间
+    string createat = 7 [(gogoproto.moretags) = 'form:"create_at" validate:"required"'];
+    //评价创建ip
+    string createip = 8 [(gogoproto.moretags) = 'form:"create_ip" validate:"required"'];
+    //评价的父id
+    string neid = 9 [(gogoproto.moretags) = 'form:"n_eid" validate:"required"'];
+
+
+}
+
+//视频的评价或者回复列表
+message EvaluationListByVodieResp{
+    //repeated表示可重复 []results
+    repeated EvaluationVodieResp  results=1;
+}
+
+//获取用户的所有视频列表
+message FileListReq{
+    string idno = 1 [(gogoproto.moretags) = 'form:"id_no" validate:"required"'];
+    //分页起点
+    int32 startpos=2 [(gogoproto.moretags) = 'form:"start_pos"'];
+    //分页结束位置
+    int32 endpos=3 [(gogoproto.moretags) = 'form:"end_pos"'];
+
+}
+
+//返回用户的所有视频列表
+message FileListResp{
+     //repeated表示可重复 []results
+    repeated UploadFileResp results=1;
+}

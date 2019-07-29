@@ -7,7 +7,7 @@ import (
 
 // Service service.
 type Service struct {
-	dao dao.Dao
+	Dao dao.Dao
 	AppConfig *dao.Config
 }
 
@@ -17,7 +17,7 @@ func New() (s *Service) {
 	appConf:=dao.BuildConfig()
 	s = &Service{
 		//ac:  ac,
-		dao: dao.New(),
+		Dao: dao.New(),
 		AppConfig:appConf,
 	}
 	return s
@@ -25,10 +25,10 @@ func New() (s *Service) {
 
 // Ping ping the resource.
 func (s *Service) Ping(ctx context.Context) (err error) {
-	return s.dao.Ping(ctx)
+	return s.Dao.Ping(ctx)
 }
 
 // Close close the resource.
 func (s *Service) Close() {
-	s.dao.Close()
+	s.Dao.Close()
 }

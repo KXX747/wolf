@@ -1,0 +1,109 @@
+syntax = "proto3";
+package account.service;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+//option go_package = "api";
+
+//创建用户
+message AddUserReq{
+    string name  =1 [(gogoproto.moretags) = 'form:"name" validate:"required"'];
+    string mobile =2 [(gogoproto.moretags) = 'form:"mobile" validate:"required"'];
+}
+
+//删除用户
+message DeleteUserReq{
+    string id_no =1 [(gogoproto.moretags) = 'form:"id_no" validate:"required"'];
+    string content = 2 [(gogoproto.moretags) = 'form:"content"'];
+}
+
+//查询用户
+message FindUserReq{
+    string id_no =1 [(gogoproto.moretags) = 'form:"id_no" validate:"required"'];
+}
+
+
+//更新用户信息用户
+message UpdateUserReq{
+   string name  =1 [(gogoproto.moretags) = 'form:"name" validate:"required"'];
+   string mobile =2 [(gogoproto.moretags) = 'form:"mobile" validate:"required"'];
+   string id_no =3 [(gogoproto.moretags) = 'form:"id_no" validate:"required"'];
+   string address =4 [(gogoproto.moretags) = 'form:"address" validate:"required"'];
+}
+
+//检查用户token
+message TokenReq{
+   string token =1 [(gogoproto.moretags) = 'form:"token" validate:"required"'];
+}
+
+//用户基础信息
+message UserReply{
+    uint32 id = 1;
+    string name  = 2 [(gogoproto.moretags) = 'form:"name"'];
+    string id_no =3 [(gogoproto.moretags) = 'form:"id_no"'];
+    string mobile =4 [(gogoproto.moretags) = 'form:"mobile"'];
+    string address =5 [(gogoproto.moretags) = 'form:"address"'];
+    string create_at =6 [(gogoproto.moretags) = 'form:"create_at"'];
+    string create_ip =7 [(gogoproto.moretags) = 'form:"create_ip"'];
+    string create_by =8 [(gogoproto.moretags) = 'form:"create_by"'];
+}
+
+//用户基础信息
+message UserListReply{
+
+   repeated UserReply  UserListReply = 1;
+}
+
+
+//select  request
+message UserCommonReq{
+     string id_no =1 [(gogoproto.moretags) = 'form:"id_no" validate:"required"'];
+     string cradid = 2 [(gogoproto.moretags) = 'form:"crad_id" '];//证件
+     string user_real_name = 3 [(gogoproto.moretags) = 'form:"user_real_name" ']; //证件名称
+     string mobile =4 [(gogoproto.moretags) = 'form:"mobile"'];
+     string querytype=5 [(gogoproto.moretags) = 'form:"querytype" validate:"required"'];// querytype= 1（默认） id_no查询  querytype=2 mobile  querytype=2 crad_id and  user_real_name
+}
+
+
+//用户实名详细信息
+message UserCommon{
+     uint32 id = 1;
+     string id_no =2 [(gogoproto.moretags) = 'form:"id_no"'];
+     string user_real_name = 3 [(gogoproto.moretags) = 'form:"user_real_name"'];//实名
+     string crad_id =4 [(gogoproto.moretags) = 'form:"crad_id"'];	//身份证
+     string crad_id_frist_img =5 [(gogoproto.moretags) = 'form:"crad_id_frist_img"']; ////身份证正面
+     string crad_id_secode_img =6 [(gogoproto.moretags) = 'form:"crad_id_secode_img"'];//反面
+     string age =7 [(gogoproto.moretags) = 'form:"age"'];
+     string sex =8 [(gogoproto.moretags) = 'form:"sex"'];
+     string mobile =9 [(gogoproto.moretags) = 'form:"mobile"'];
+     string address =10 [(gogoproto.moretags) = 'form:"address"'];
+     string name =11 [(gogoproto.moretags) = 'form:"name"'];
+     int64 parent_id = 12 [(gogoproto.moretags) = 'form:"parent_id"'];
+}
+
+
+//用户信息
+service Users{
+     //查询用户
+     rpc FindUser(FindUserReq) returns(UserReply);
+     //查询多个用户
+     rpc FindUserList(FindUserReq) returns(UserListReply);
+      //添加用户
+     rpc AddUser(AddUserReq) returns(UserReply);
+     //删除用户
+     rpc DeleteUser(DeleteUserReq) returns(UserReply);
+     //修改用户
+     rpc UpdateUser(UpdateUserReq) returns(UserReply);
+
+     //用户token较验
+     rpc token(TokenReq)returns(UserReply);
+
+}
+
+
+//详细信息
+service UserDetailCommon{
+     rpc UpdateUserCommon(UserCommon) returns(UserCommon);
+     rpc FindUserCommon(UserCommonReq) returns(UserCommon);
+
+}

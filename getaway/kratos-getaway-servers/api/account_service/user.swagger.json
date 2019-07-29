@@ -1,0 +1,610 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "user.proto",
+        "version": ""
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/account.service.UserDetailCommon/FindUserCommon": {
+            "get": {
+                "summary": "/account.service.UserDetailCommon/FindUserCommon",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.UserCommon"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id_no",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "crad_id",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_real_name",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "querytype",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "account.service.UserDetailCommon"
+                ]
+            }
+        },
+        "/account.service.UserDetailCommon/UpdateUserCommon": {
+            "get": {
+                "summary": "/account.service.UserDetailCommon/UpdateUserCommon",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.UserCommon"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "id_no",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_real_name",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "crad_id",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "crad_id_frist_img",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "crad_id_secode_img",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "age",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sex",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parent_id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "account.service.UserDetailCommon"
+                ]
+            }
+        },
+        "/account.service.Users/AddUser": {
+            "get": {
+                "summary": "添加用户",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.UserReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "account.service.Users"
+                ]
+            }
+        },
+        "/account.service.Users/DeleteUser": {
+            "get": {
+                "summary": "删除用户",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.UserReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id_no",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "account.service.Users"
+                ]
+            }
+        },
+        "/account.service.Users/FindUser": {
+            "get": {
+                "summary": "查询用户",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.UserReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id_no",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "account.service.Users"
+                ]
+            }
+        },
+        "/account.service.Users/FindUserList": {
+            "get": {
+                "summary": "查询多个用户",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.UserListReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id_no",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "account.service.Users"
+                ]
+            }
+        },
+        "/account.service.Users/UpdateUser": {
+            "get": {
+                "summary": "修改用户",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.UserReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id_no",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "account.service.Users"
+                ]
+            }
+        },
+        "/account.service.Users/token": {
+            "get": {
+                "summary": "用户token较验",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.account.service.UserReply"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "account.service.Users"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        ".account.service.AddUserReq": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                }
+            },
+            "description": "创建用户",
+            "required": [
+                "name",
+                "mobile"
+            ]
+        },
+        ".account.service.DeleteUserReq": {
+            "type": "object",
+            "properties": {
+                "id_no": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                }
+            },
+            "description": "删除用户",
+            "required": [
+                "id_no"
+            ]
+        },
+        ".account.service.FindUserReq": {
+            "type": "object",
+            "properties": {
+                "id_no": {
+                    "type": "string"
+                }
+            },
+            "description": "查询用户",
+            "required": [
+                "id_no"
+            ]
+        },
+        ".account.service.TokenReq": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            },
+            "description": "检查用户token",
+            "required": [
+                "token"
+            ]
+        },
+        ".account.service.UpdateUserReq": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                },
+                "id_no": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            },
+            "description": "更新用户信息用户",
+            "required": [
+                "name",
+                "mobile",
+                "id_no",
+                "address"
+            ]
+        },
+        ".account.service.UserCommon": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "id_no": {
+                    "type": "string"
+                },
+                "user_real_name": {
+                    "type": "string"
+                },
+                "crad_id": {
+                    "type": "string"
+                },
+                "crad_id_frist_img": {
+                    "type": "string"
+                },
+                "crad_id_secode_img": {
+                    "type": "string"
+                },
+                "age": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parent_id": {
+                    "type": "integer"
+                }
+            },
+            "description": "用户实名详细信息"
+        },
+        ".account.service.UserCommonReq": {
+            "type": "object",
+            "properties": {
+                "id_no": {
+                    "type": "string"
+                },
+                "crad_id": {
+                    "type": "string"
+                },
+                "user_real_name": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                },
+                "querytype": {
+                    "type": "string"
+                }
+            },
+            "description": "select  request",
+            "required": [
+                "id_no",
+                "querytype"
+            ]
+        },
+        ".account.service.UserListReply": {
+            "type": "object",
+            "properties": {
+                "UserListReply": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.account.service.UserReply"
+                    }
+                }
+            },
+            "description": "用户基础信息"
+        },
+        ".account.service.UserReply": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "id_no": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "create_at": {
+                    "type": "string"
+                },
+                "create_ip": {
+                    "type": "string"
+                },
+                "create_by": {
+                    "type": "string"
+                }
+            },
+            "description": "用户基础信息"
+        }
+    }
+}

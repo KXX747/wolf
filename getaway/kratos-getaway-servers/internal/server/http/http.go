@@ -1,24 +1,22 @@
 package http
 
 import (
-	"github.com/bilibili/kratos/pkg/net/http/blademaster/middleware/auth"
-	"net/http"
-
-	"github.com/KXX747/wolf/getaway/kratos-getaway-servers/internal/model"
+	"github.com/KXX747/wolf/getaway/kratos-getaway-servers/internal/server/grpc/client"
 	"github.com/KXX747/wolf/getaway/kratos-getaway-servers/internal/service"
-
-	"github.com/bilibili/kratos/pkg/log"
 	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
+	"github.com/bilibili/kratos/pkg/net/http/blademaster/middleware/auth"
 )
 
 var (
 	svc *service.Service
+	userServer * client.UserServer
 )
 
 // New new a bm server.
 func New(s *service.Service) (engine *bm.Engine) {
 
 	svc = s
+	initServer(svc)
 	engine = bm.DefaultServer(s.AppConfig.Http)
 	initRouter(engine)
 	if err := engine.Start(); err != nil {
@@ -29,10 +27,9 @@ func New(s *service.Service) (engine *bm.Engine) {
 
 func initRouter(e *bm.Engine) {
 	e.Ping(ping)
-	//限流中间件
-	limiter := bm.NewRateLimiter(nil)
-	e.Use(limiter.Limit())
-	e.Use()
+	////限流中间件
+	//limiter := bm.NewRateLimiter(nil)
+	//e.Use(limiter.Limit())
 	g := e.Group("/servers/user/api/v1")
 	{
 		g.GET("/start", howToStart)
@@ -69,22 +66,11 @@ func initRouter(e *bm.Engine) {
 		streamServer.POST("/findByid",FindFileAllevalbyVid);
 		streamServer.POST("/newalleval",NewFileAllevalbyVid);
 	}
+}
 
+//grpc client
+func initServer(s *service.Service)  {
+	userServer=client.NewUserServer(s.AppConfig.RPCClient2.User)
 
 }
 
-func ping(ctx *bm.Context) {
-	if err := svc.Ping(ctx); err != nil {
-		log.Error("ping error(%v)", err)
-		ctx.AbortWithStatus(http.StatusServiceUnavailable)
-	}
-}
-
-// example for http request handler.
-func howToStart(c *bm.Context) {
-	k := &model.Kratos{
-		Hello: "Golang 大法好 !!! docker",
-	}
-	log.Info("Golang 大法好 !!! ip=%s",c.Request.RemoteAddr)
-	c.JSON(k, nil)
-}

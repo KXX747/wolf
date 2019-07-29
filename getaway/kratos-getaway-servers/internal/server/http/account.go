@@ -1,6 +1,10 @@
 package http
 
-import "github.com/bilibili/kratos/pkg/net/http/blademaster"
+import (
+	"github.com/KXX747/wolf/getaway/kratos-getaway-servers/api/account_service"
+	"github.com/bilibili/kratos/pkg/ecode"
+	"github.com/bilibili/kratos/pkg/net/http/blademaster"
+)
 
 const(
 
@@ -22,11 +26,23 @@ const(
 	FindUserCommonUrl="%s:%s/account.service.UserDetailCommon/FindUserCommon"
 )
 
-
 /**
 添加用户
  */
 func NewUser(c *blademaster.Context)  {
+
+
+	mAddUserReq:=new(account_service.AddUserReq)
+	if err := c.Bind(mAddUserReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+	if reply,code:=userServer.AddUserDao(c,mAddUserReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
 
 }
 
@@ -34,13 +50,36 @@ func NewUser(c *blademaster.Context)  {
 修改用户
 */
 func UpdateUser(c *blademaster.Context)  {
-
+	mUpdateUserReq:=new(account_service.UpdateUserReq)
+	if err := c.Bind(mUpdateUserReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+	if reply,code:=userServer.UpdateUserDao(c,mUpdateUserReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
 }
 
 /**
 删除用户
 */
 func DeleteUser(c *blademaster.Context)  {
+	mDeleteUserReq:=new(account_service.DeleteUserReq)
+	if err := c.Bind(mDeleteUserReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+
+	if reply,code:=userServer.DeleteUserDao(c,mDeleteUserReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
+
 
 }
 
@@ -48,14 +87,38 @@ func DeleteUser(c *blademaster.Context)  {
 获取用户信息
  */
 func FindUserByIdNo(c *blademaster.Context)  {
-	
+
+	mFindUserReq:=new(account_service.FindUserReq)
+	if err := c.Bind(mFindUserReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+
+	if reply,code:=userServer.FindUserDao(c,mFindUserReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
+
+
 }
 
 /**
 获取多个用户信息
 */
 func FindUserListByIdNo(c *blademaster.Context)  {
-
+	mFindUserReq:=new(account_service.FindUserReq)
+	if err := c.Bind(mFindUserReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+	if reply,code:=userServer.FindUserListDao(c,mFindUserReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
 
 }
 
@@ -65,12 +128,38 @@ func FindUserListByIdNo(c *blademaster.Context)  {
 */
 func UpdateCommonUser(c *blademaster.Context)  {
 
+	mUserCommon:=new(account_service.UserCommon)
+	if err := c.Bind(mUserCommon); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+	if reply,code:=userServer.UpdateUserCommon(c,mUserCommon);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
+
+
 }
 
 /**
 获取用户信息common
 */
 func FindCommonUserByIdNo(c *blademaster.Context)  {
+
+
+	mUserCommonReq:=new(account_service.UserCommonReq)
+	if err := c.Bind(mUserCommonReq); err != nil {
+		c.JSON(nil,  ecode.ReqParamErr)
+		return
+	}
+	if reply,code:=userServer.FindUserCommon(c,mUserCommonReq);code!=nil {
+		c.JSON(nil, code)
+		return
+	}else {
+		c.JSON(reply,  nil)
+	}
 
 }
 
@@ -83,6 +172,7 @@ func FindCommonUserByIdNo(c *blademaster.Context)  {
 */
 //上传信息照片
 func updatecard(c *blademaster.Context) {
-	
+
+
 
 }
