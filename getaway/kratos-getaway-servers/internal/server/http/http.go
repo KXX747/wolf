@@ -51,7 +51,7 @@ func initRouter(e *bm.Engine) {
 		userServer.GET("/newUser", NewUser)
 		userServer.GET("/updateUser", UpdateUser)
 		userServer.GET("/deleteUser", DeleteUser)
-		userServer.GET("/updatecard", updatecard)
+		userServer.POST("/updatecard", updatecard)
 		userServer.GET("/findUserByIdNo", FindUserByIdNo)
 		userServer.GET("/findUserListByIdNo", FindUserListByIdNo)
 

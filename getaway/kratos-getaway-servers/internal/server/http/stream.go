@@ -2,8 +2,8 @@ package http
 
 import (
 	pb "github.com/KXX747/wolf/getaway/kratos-getaway-servers/api/stream_server"
-	"github.com/bilibili/kratos/pkg/net/http/blademaster"
 	"github.com/bilibili/kratos/pkg/ecode"
+	"github.com/bilibili/kratos/pkg/net/http/blademaster"
 )
 
 /**
@@ -19,7 +19,7 @@ const (
 	FindUploadUrl="%s:%s/stream.server.v1.Upload/listfile"
 	NewFileAllevalbyUrl="%s:%s/stream.server.v1.Upload/addevaluation"
 	FindFileAllevalbyUrl="%s:%s/stream.server.v1.Upload/fileallevalby"
-
+	FILEUP  = "file_up"
 
 )
 
@@ -31,6 +31,22 @@ func UploadFile(c *blademaster.Context)  {
 		c.JSON(nil,  ecode.ReqParamErr)
 		return
 	}
+
+	//WmText
+	//获取key获取文件名称
+	file, handler, err := c.Request.FormFile(FILEUP)
+	if file==nil ||err!=nil {
+		err = ecode.ReqParamErr
+		return
+	}
+	defer file.Close()
+
+	size:=handler.Size
+	c.Request.ParseMultipartForm(size)
+
+	content := make([]byte, size)
+	file.Read(content)
+	mUploadFileReq.WmText = string(content[:])
 	if reply,code:=streamRPCClient.File(c,mUploadFileReq);code!=nil {
 		c.JSON(nil, code)
 		return

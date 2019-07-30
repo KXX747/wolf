@@ -18,7 +18,7 @@ type StreamServer struct {
 // NewClient new member grpc client
 func newStreamClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (pb.UploadClient, error) {
 	client := warden.NewClient(cfg, opts...)
-	conn, err := client.Dial(context.Background(), "127.0.0.1:39000")
+	conn, err := client.Dial(context.Background(), "127.0.0.1:39001")
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,6 @@ func NewStreamServer(conf *warden.ClientConfig) (mStreamServer *StreamServer){
 		log.Error("userRPCClient warden.ClientConfig err=%s",err)
 
 	}
-
 	mStreamServer =&StreamServer{
 		cfg:conf,
 		uploadClient:streamRpcClient,
