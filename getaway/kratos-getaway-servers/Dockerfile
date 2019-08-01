@@ -19,7 +19,7 @@
 
  EXPOSE 38705
 
- RUN ls &&pwd
+ #RUN ls &&pwd
  CMD ["./start.sh"]
 
  #构建

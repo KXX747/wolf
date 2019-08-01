@@ -9,8 +9,10 @@ require (
 	github.com/golang/protobuf v1.3.1 // indirect
 	github.com/kr/fs v0.1.0 // indirect
 	github.com/pkg/sftp v1.10.0 // indirect
+	github.com/samuel/go-zookeeper v0.0.0-20180130194729-c4fab1ac1bec
 	github.com/satori/go.uuid v1.2.0 // indirect
 	golang.org/x/net v0.0.0-20190420063019-afa5a82059c6 // indirect
+	google.golang.org/grpc v1.20.1
 )
 
 replace (

@@ -13,16 +13,16 @@ zoookeeper 服务治理和分布式锁，服务配置
 
 import (
 	"context"
-	"path"
-	"strings"
-	"errors"
 	"encoding/json"
+	"errors"
+	"github.com/bilibili/kratos/pkg/log"
 	"github.com/bilibili/kratos/pkg/naming"
 	"github.com/samuel/go-zookeeper/zk"
-	"github.com/bilibili/kratos/pkg/log"
-	"time"
+	xtime "github.com/bilibili/kratos/pkg/time"
 	"net/url"
-	"fmt"
+	"path"
+	"strings"
+	"time"
 )
 
 const(
@@ -40,7 +40,7 @@ const(
 type Zookeeper struct {
 	Root string
 	Addrs []string
-	Timeout time.Duration
+	Timeout xtime.Duration
 }
 
 // livezk live service zookeeper registry
@@ -51,17 +51,14 @@ type livezk struct {
 }
 
 
-
-
 // New new live zookeeper registry
 func NewZookeeper(config *Zookeeper)(*livezk,error){
 
 	lz :=&livezk{
 		zkConfig:config,
 	}
-	fmt.Println("lz.zkConfig ",lz.zkConfig)
 	var err error
-	lz.zkConn,lz.zkEvent,err=zk.Connect(lz.zkConfig.Addrs,lz.zkConfig.Timeout)
+	lz.zkConn,lz.zkEvent,err=zk.Connect(lz.zkConfig.Addrs,time.Duration(lz.zkConfig.Timeout))
 	if err!=nil {
 		//
 		go lz.eventproc()
@@ -70,73 +67,62 @@ func NewZookeeper(config *Zookeeper)(*livezk,error){
 }
 
 
-type zkIns struct {
-	Group       string `json:"group"`
-	LibVersion  string `json:"lib_version"`
-	StartupTime string `json:"startup_time"`
-}
+//type zkIns struct {
+//	Group       string `json:"group"`
+//	//LibVersion  string `json:"lib_version"`
+//	StartupTime string `json:"startup_time"`
+//	*naming.Instance
+//
+//}
 
 func newZkInsData(ins *naming.Instance) ([]byte, error) {
-	zi := &zkIns{
-		// TODO group support
-		Group:       "default",
-		LibVersion:  ins.Version,
-		StartupTime: time.Now().Format("2006-01-02 15:04:05"),
-	}
-	return json.Marshal(zi)
+	//zi := &zkIns{
+	//	// TODO group support
+	//	Group:       "default",
+	//	//LibVersion:  ins.Version,
+	//	StartupTime: time.Now().Format("2006-01-02 15:04:05"),
+	//}
+	ins.LastTs = time.Now().Unix()
+	return json.Marshal(ins)
 }
 
 
 //注册到zk中
 func (l *livezk)Register(ctx context.Context, ins *naming.Instance) (cancel context.CancelFunc, err error){
 	//
-	fmt.Println("start  (l *livezk)Register ......")
 	nodePath := path.Join(l.zkConfig.Root, basePath, ins.AppID)
-	fmt.Println("nodePath = ",nodePath)
 	if err = l.createAll(nodePath); err != nil {
-		fmt.Println("l.createAll err=",err)
 		return
 	}
 
 	//遍历获取rpc地址
 	var rpc string
-	fmt.Println("ins.Addrs =",ins.Addrs)
 	for _,addr:=range ins.Addrs {
 		var url *url.URL
 		url,err=url.Parse(addr)
-		fmt.Println("url=",url)
 		if url != nil && url.Scheme == scheme {
 			rpc = url.Host
 			break
 		}
 	}
-
 	if rpc == "" {
 		err = errors.New("no GRPC addr")
-		fmt.Println(" rpc ==null   err=",err)
+		log.Info(" rpc ==null   err=%s",err)
 
 		return
 	}
-	fmt.Println("rpc =",rpc)
 	dataPath := path.Join(nodePath, rpc)
-	fmt.Println("nodePath rpc =",dataPath)
 	var data []byte
 	data, err =newZkInsData(ins)
 	if err != nil {
-		fmt.Println(" newZkInsData   err=",err)
 		return nil, err
-	}else {
-		fmt.Println(" newZkInsData   data=",data)
 	}
 	//zk注册零时节点
-	var nodeConetnt string
-	nodeConetnt, err=l.zkConn.Create(dataPath,data,zk.FlagEphemeral, zk.WorldACL(zk.PermAll))
+	_, err=l.zkConn.Create(dataPath,data,zk.FlagEphemeral, zk.WorldACL(zk.PermAll))
 	if err != nil {
-		fmt.Println(" l.zkConn.Create   err=",err)
 		return nil, err
-	}else {
-		fmt.Println(" l.zkConn.Create   nodeConetnt=",nodeConetnt)
 	}
+
 	//将zk close 通过参数提供出去
 	return func() {
 		l.unregister(dataPath)

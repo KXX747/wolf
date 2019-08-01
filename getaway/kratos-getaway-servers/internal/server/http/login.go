@@ -43,7 +43,6 @@ func LoginSys(c *blademaster.Context)  {
 			c.JSON(nil, ecode.RequestErr)
 			return
 		}else {
-			log.Info("LoginSys resp =%s",resp)
 			c.JSON(resp,nil)
 		}
 
@@ -79,7 +78,6 @@ func LoginOut(c *blademaster.Context)  {
 			c.JSON(nil, ecode.RequestErr)
 			return
 		}
-		log.Info("LoginOut resp =%s",resp)
 		c.JSON(resp,nil)
 
 

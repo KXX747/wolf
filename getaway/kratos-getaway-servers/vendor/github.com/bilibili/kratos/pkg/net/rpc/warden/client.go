@@ -18,8 +18,6 @@ import (
 	nmd "github.com/bilibili/kratos/pkg/net/metadata"
 	"github.com/bilibili/kratos/pkg/net/netutil/breaker"
 	"github.com/bilibili/kratos/pkg/net/rpc/warden/internal/status"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver/direct"
 	"github.com/bilibili/kratos/pkg/net/trace"
 	xtime "github.com/bilibili/kratos/pkg/time"
 
@@ -49,10 +47,6 @@ func baseMetadata() metadata.MD {
 		gmd[nmd.Color] = []string{env.Color}
 	}
 	return gmd
-}
-
-func init() {
-	resolver.Register(direct.New())
 }
 
 // ClientConfig is rpc client conf.

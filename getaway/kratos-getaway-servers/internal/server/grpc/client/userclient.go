@@ -1,27 +1,34 @@
 package client
 
-import(
+import (
 	"context"
 	"github.com/KXX747/wolf/getaway/kratos-getaway-servers/api/account_service"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden"
+	"github.com/KXX747/wolf/getaway/kratos-getaway-servers/internal/dao"
 	"github.com/bilibili/kratos/pkg/log"
+	"github.com/bilibili/kratos/pkg/net/rpc/warden"
+	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver/livezk"
 	"google.golang.org/grpc"
 )
+
 
 /**
 连接grpc的服务
  */
 type UserServer struct {
-	cfg *warden.ClientConfig
+	cfg *dao.Config
 	userRPCClient account_service.UsersClient
 	userDetailCommonClient account_service.UserDetailCommonClient
 
 }
 
 // NewClient new member grpc client
-func NewClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (account_service.UsersClient, error) {
-	client := warden.NewClient(cfg, opts...)
-	conn, err := client.Dial(context.Background(), "127.0.0.1:38889")
+func NewClient(cfg *dao.Config, opts ...grpc.DialOption) (account_service.UsersClient, error) {
+	client := warden.NewClient(cfg.RPCClient2.User, opts...)
+
+	result:=livezk.Discovery(cfg.Livezk,DisectUserAppId)
+	log.Info("==========================NewClient =%s",result)
+
+	conn, err := client.Dial(context.Background(),"192.168.1.101:38889" )
 	if err != nil {
 		return nil, err
 	}
@@ -32,9 +39,16 @@ func NewClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (account_servi
 }
 
 // NewClient new member grpc client
-func NewUserCommonClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (account_service.UserDetailCommonClient, error) {
-	client := warden.NewClient(cfg, opts...)
-	conn, err := client.Dial(context.Background(), "127.0.0.1:38889")
+func NewUserCommonClient(cfg *dao.Config, opts ...grpc.DialOption) (account_service.UserDetailCommonClient, error) {
+	client := warden.NewClient(cfg.RPCClient2.User, opts...)
+
+	result:=livezk.Discovery(cfg.Livezk,DisectUserAppId)
+
+		log.Info("==========================NewUserCommonClient =%s",result)
+
+
+
+	conn, err := client.Dial(context.Background(), "192.168.1.101:38889")
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +61,7 @@ func NewUserCommonClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (acc
 
 
 //user rpc client
-func NewUserServer(cfg *warden.ClientConfig) (mUserServer *UserServer){
+func NewUserServer(cfg *dao.Config) (mUserServer *UserServer){
 	userRPCClient,err := NewClient(cfg)
 	if err!=nil {
 		log.Error("userRPCClient warden.ClientConfig err=%s",err)

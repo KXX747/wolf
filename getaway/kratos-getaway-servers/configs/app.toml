@@ -73,3 +73,8 @@
       network = "unix"
       protocolVersion = 1
       probability = 0.5
+
+[liveZK]
+    addrs = ["192.168.57.134:2181", "192.168.57.135:2181", "192.168.57.136:2181"]
+    timeout = "1s"
+    root = "/microservice"

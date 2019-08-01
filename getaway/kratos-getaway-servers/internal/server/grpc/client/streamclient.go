@@ -3,22 +3,30 @@ package client
 视频和评价服务
  */
 import (
-	pb "github.com/KXX747/wolf/getaway/kratos-getaway-servers/api/stream_server"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden"
-	"github.com/bilibili/kratos/pkg/log"
-	"google.golang.org/grpc"
 	"context"
+	pb "github.com/KXX747/wolf/getaway/kratos-getaway-servers/api/stream_server"
+	"github.com/KXX747/wolf/getaway/kratos-getaway-servers/internal/dao"
+	"github.com/bilibili/kratos/pkg/log"
+	"github.com/bilibili/kratos/pkg/net/rpc/warden"
+	"github.com/bilibili/kratos/pkg/net/rpc/warden/resolver/livezk"
+	"google.golang.org/grpc"
 )
 
 type StreamServer struct {
-	cfg *warden.ClientConfig
+	cfg *dao.Config
 	uploadClient pb.UploadClient
 }
 
 // NewClient new member grpc client
-func newStreamClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (pb.UploadClient, error) {
-	client := warden.NewClient(cfg, opts...)
-	conn, err := client.Dial(context.Background(), "127.0.0.1:39001")
+func newStreamClient(cfg *dao.Config, opts ...grpc.DialOption) (pb.UploadClient, error) {
+	client := warden.NewClient(cfg.RPCClient2.Stream, opts...)
+
+	result:=livezk.Discovery(cfg.Livezk,DisectStreamAppId)
+	log.Info(" =============================newStreamClient =%s",result)
+	for value:= range result {
+		log.Info(" =============================newStreamClient =%s",value)
+	}
+	conn, err := client.Dial(context.Background(), "192.168.1.101:39001")
 	if err != nil {
 		return nil, err
 	}
@@ -28,13 +36,14 @@ func newStreamClient(cfg *warden.ClientConfig, opts ...grpc.DialOption) (pb.Uplo
 	return pb.NewUploadClient(conn), nil
 }
 
+
+
 //
-func NewStreamServer(conf *warden.ClientConfig) (mStreamServer *StreamServer){
+func NewStreamServer(conf *dao.Config) (mStreamServer *StreamServer){
 
 	streamRpcClient,err:=newStreamClient(conf)
 	if err!=nil {
 		log.Error("userRPCClient warden.ClientConfig err=%s",err)
-
 	}
 	mStreamServer =&StreamServer{
 		cfg:conf,

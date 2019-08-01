@@ -38,6 +38,7 @@ type Instance struct {
 }
 
 // Resolver resolve naming service
+//获取服务
 type Resolver interface {
 	Fetch(context.Context) (*InstancesInfo, bool)
 	Watch() <-chan struct{}
@@ -45,12 +46,14 @@ type Resolver interface {
 }
 
 // Registry Register an instance and renew automatically.
+//注册服务
 type Registry interface {
 	Register(ctx context.Context, ins *Instance) (cancel context.CancelFunc, err error)
 	Close() error
 }
 
 // Builder resolver builder.
+//构造服务
 type Builder interface {
 	Build(id string) Resolver
 	Scheme() string

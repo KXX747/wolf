@@ -2,6 +2,7 @@ package dao
 
 import (
 	"context"
+	"github.com/bilibili/kratos/pkg/naming/livezk"
 	"time"
 
 	"github.com/BurntSushi/toml"
@@ -63,6 +64,7 @@ type Config struct {
 	Tracer 			*trace.Config
 	UserHttpClient  *blademaster.ClientConfig
 	RPCClient2	    *RPC
+	Livezk   		*livezk.Zookeeper
 }
 
 

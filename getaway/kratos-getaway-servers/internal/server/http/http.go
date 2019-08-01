@@ -72,10 +72,10 @@ func initRouter(e *bm.Engine) {
 
 //grpc client
 func initServer(s *service.Service)  {
-	userRPCServer=client.NewUserServer(s.AppConfig.RPCClient2.User)
+	userRPCServer=client.NewUserServer(s.AppConfig)
 	userHttpClient =bm.NewClient(s.AppConfig.UserHttpClient)
 	//
-	streamRPCClient=client.NewStreamServer(s.AppConfig.RPCClient2.Stream)
+	streamRPCClient=client.NewStreamServer(s.AppConfig)
 
 
 }

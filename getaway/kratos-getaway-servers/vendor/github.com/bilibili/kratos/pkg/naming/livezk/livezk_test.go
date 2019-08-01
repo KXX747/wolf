@@ -33,7 +33,7 @@ func init()  {
 	zkconfig =&Zookeeper{
 		Addrs:[]string{"192.168.57.134:2181","192.168.57.135:2181","192.168.57.136:2181"},
 		Root:"/microservice",
-		Timeout:1* time.Second,
+		//Timeout:1* time.Second,
 	}
 
 	var err error
@@ -116,6 +116,9 @@ func TestGetZKPath(t *testing.T)  {
 		log.Info("zconn.zkConn.Get data=%s stat=%d",string(data),stat.Aversion)
 	}
 }
+
+
+
 
 //创建节点
 func TestCreateZKPath(t *testing.T)  {
@@ -232,7 +235,7 @@ func TestZkLock(t *testing.T)  {
 	zkconfig =&Zookeeper{
 		Addrs:[]string{"192.168.57.134:2181","192.168.57.135:2181","192.168.57.136:2181"},
 		Root:"/microservice",
-		Timeout:1* time.Second,
+		//Timeout:1* time.Second,
 	}
 
 	var err error

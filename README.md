@@ -12,6 +12,8 @@ go mod vendor
 //添加库
 go mod edit -require=github.com/pkg/sftp@v1.10.0
 
+go mod edit -require=github.com/samuel/go-zookeeper@latest
+go mod edit -require=github.com/gogo/protobuf/gogoproto@latest
 
 go get -u github.com/gogo/protobuf/protoc-gen-gofast
 
