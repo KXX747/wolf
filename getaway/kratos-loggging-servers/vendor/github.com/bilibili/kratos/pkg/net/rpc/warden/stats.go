@@ -14,7 +14,6 @@ import (
 func (s *Server) stats() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, args *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		resp, err = handler(ctx, req)
-		//获取cpu
 		var cpustat cpu.Stat
 		cpu.ReadStat(&cpustat)
 		if cpustat.Usage != 0 {

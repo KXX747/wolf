@@ -6,8 +6,6 @@ import (
 	"os"
 	"sync"
 	"time"
-	//"github.com/golang/protobuf/proto"
-	//protogen "github.com/bilibili/kratos/pkg/net/trace/proto"
 )
 
 const (
@@ -71,13 +69,6 @@ func (c *connReport) WriteSpan(sp *span) error {
 	if err != nil {
 		return err
 	}
-
-	//fmt.Println()
-	//protoSpan := new(protogen.Span)
-	//proto.Unmarshal(data,protoSpan)
-	//fmt.Println("opentracing上传服务器数据： ",protoSpan)
-	//fmt.Println()
-
 	return c.writePackage(data)
 }
 

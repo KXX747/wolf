@@ -9,10 +9,12 @@
  RUN chmod +X $GOPATH/src/github.com/KXX747/wolf/getaway/kratos-loggging-servers/start.sh
 
  #log和trace日志地址
- RUN mkdir -p /tmp/trace/unix_sock
- RUN mkdir -p /tmp/log/unix_sock
- VOLUME /tmp/trace/unix_sock
- VOLUME /tmp/log/unix_sock
+ RUN mkdir -p /tmp/trace
+ RUN mkdir -p /tmp/log
+ RUN mkdir -p /tmp/trace
+ RUN mkdir -p /tmp/log
+ VOLUME /tmp/trace
+ VOLUME /tmp/log
 
  #RUN pwd
  RUN cd cmd && go build
@@ -25,5 +27,7 @@
   #docker build -t kratos-loggging-servers .
 
  #运行
- #docker run --name=pb_loggging_servers -p 38701:38701 -p 38702:38702  -v /tmp/trace/unix_sock:/tmp/trace/unix_sock -v /tmp/log/unix_sock:/tmp/log/unix_sock -d kratos-loggging-servers
+#docker run --name=pb_loggging_servers -p 38701:38701 -p 38702:38702  -v /tmp/trace:/tmp/trace -v /tmp/log:/tmp/log -d kratos-loggging-servers
 
+
+#scp -r kratos-loggging-servers/ root@192.168.57.136:/root/go/src/github.com/KXX747/wolf/getaway

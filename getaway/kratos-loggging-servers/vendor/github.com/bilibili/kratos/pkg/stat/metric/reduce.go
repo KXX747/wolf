@@ -1,11 +1,5 @@
 package metric
 
-/**
-metric统计计算
-
- */
-
-
 // Sum the values within the window.
 func Sum(iterator Iterator) float64 {
 	var result = 0.0
@@ -54,11 +48,9 @@ func Min(iterator Iterator) float64 {
 
 // Max the values within the window.
 func Max(iterator Iterator) float64 {
-
 	var result = 0.0
 	var started = false
 	for iterator.Next() {
-		//
 		bucket := iterator.Bucket()
 		for _, p := range bucket.Points {
 			if !started {

@@ -2,19 +2,14 @@ package metric
 
 import "sync"
 
-
-/**
- counter和gauge的统计点，根据window窗口进行统计
- */
-
 // PointPolicy is a policy of points within the window.
 // PointPolicy wraps the window and make it seem like ring-buf.
 // When using PointPolicy, every buckets within the windows contains at more one point.
 // e.g. [[1], [2], [3]]
 type PointPolicy struct {
-	mu     sync.RWMutex //读写锁
+	mu     sync.RWMutex
 	size   int
-	window *Window //根据window窗口统计
+	window *Window
 	offset int
 }
 

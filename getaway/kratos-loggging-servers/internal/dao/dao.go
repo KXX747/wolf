@@ -2,6 +2,8 @@ package dao
 
 import (
 	"context"
+	"github.com/bilibili/kratos/pkg/cache/kafka"
+	"github.com/bilibili/kratos/pkg/database/mongo"
 	"time"
 
 	"github.com/bilibili/kratos/pkg/cache/memcache"
@@ -57,6 +59,8 @@ type Config struct {
 	Base 			*BaseInfo
 	Log 			*log.Config
 	Tracer 			*trace.Config
+	Mongo			*mongo.Config
+	Clusters		*kafka.Config
 }
 
 

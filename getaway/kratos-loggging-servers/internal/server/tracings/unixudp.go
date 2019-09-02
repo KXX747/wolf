@@ -32,26 +32,24 @@ func(mTraceService *TraceService) initUnix(svc  *dao.Config) {
 
 	agent := mTraceService.AppConfig.Tracer
 	var unixListener *net.UnixListener
-	//var err error
-	//svc.AppConfig.Log.Agent.Addr
-	//err:=common.ListenUNIX(agent.Addr)
-	//if err!=nil {
-	//	log.Info("agent start log server err=%s addr=%s",err,agent.Addr)
-	//	return
-	//}
+	var err error
+
 	common.RemoveFilePath(agent.Addr)
-	//ticker:=time.NewTicker(megreWait)
 	log.Info("agent addr=%s  peoto=%s timeout=%s", agent.Addr, agent.Network, agent.Timeout)
 
-	unixAddr, _ := net.ResolveUnixAddr(agent.Network, agent.Addr)
-	unixListener, _ = net.ListenUnix(agent.Network, unixAddr)
+	unixAddr, err := net.ResolveUnixAddr(agent.Network, agent.Addr)
+	unixListener, err = net.ListenUnix(agent.Network, unixAddr)
+	if err!=nil {
+		log.Info(" tracer server start fial err=%s",err)
+		return
+	}
 	defer unixListener.Close()
 
 	for {
 		unixConn, err := unixListener.AcceptUnix()
 		//unixConn.SetDeadline(time.Now().Add())
 		if err != nil {
-			log.Info("unixListener.AcceptUnix err=%s",err)
+			log.Info(" tracer unixListener.AcceptUnix err=%s",err)
 			continue
 		}
 		//go unixPipe(unixConn,mTraceService)
@@ -86,6 +84,10 @@ func unixPipeByte(conn *net.UnixConn) {
 		fmt.Println()
 	}
 }
+
+
+
+
 
 /**
 处理数据数据

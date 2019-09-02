@@ -3,7 +3,6 @@ package metric
 import (
 	"sync"
 	"time"
-	"fmt"
 )
 
 // RollingPolicy is a policy for ring window based on time duration.
@@ -27,7 +26,6 @@ type RollingPolicyOpts struct {
 
 // NewRollingPolicy creates a new RollingPolicy based on the given window and RollingPolicyOpts.
 func NewRollingPolicy(window *Window, opts RollingPolicyOpts) *RollingPolicy {
-
 	return &RollingPolicy{
 		window: window,
 		size:   window.Size(),
@@ -40,7 +38,6 @@ func NewRollingPolicy(window *Window, opts RollingPolicyOpts) *RollingPolicy {
 
 func (r *RollingPolicy) timespan() int {
 	v := int(time.Since(r.lastAppendTime) / r.bucketDuration)
-	//fmt.Println("v =",v ," r.size=",r.size)
 	if v < r.size && v > -1 { // maybe time backwards
 		return v
 	}
@@ -48,12 +45,9 @@ func (r *RollingPolicy) timespan() int {
 }
 
 func (r *RollingPolicy) add(f func(offset int, val float64), val float64) {
-	fmt.Println()
 	r.mu.Lock()
 	timespan := r.timespan()
-	//fmt.Println("add timespan=",timespan,r)
 	if timespan > 0 {
-
 		offset := r.offset
 		// reset the expired buckets
 		s := offset + 1
@@ -88,7 +82,6 @@ func (r *RollingPolicy) Add(val float64) {
 }
 
 // Reduce applies the reduction function to all buckets within the window.
-//rolling创建Iterator
 func (r *RollingPolicy) Reduce(f func(Iterator) float64) (val float64) {
 	r.mu.RLock()
 	timespan := r.timespan()

@@ -23,18 +23,14 @@ type RollingCounterOpts struct {
 	BucketDuration time.Duration
 }
 
-//关联rollingPolicy
 type rollingCounter struct {
 	policy *RollingPolicy
 }
 
 // NewRollingCounter creates a new RollingCounter bases on RollingCounterOpts.
 func NewRollingCounter(opts RollingCounterOpts) RollingCounter {
-	//创建window，指定window的buckets的大小
 	window := NewWindow(WindowOpts{Size: opts.Size})
-	//创建新的point
 	policy := NewRollingPolicy(window, RollingPolicyOpts{BucketDuration: opts.BucketDuration})
-	//
 	return &rollingCounter{
 		policy: policy,
 	}

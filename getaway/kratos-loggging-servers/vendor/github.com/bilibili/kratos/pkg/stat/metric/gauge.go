@@ -3,17 +3,7 @@ package metric
 import "sync/atomic"
 
 var _ Metric = &gauge{}
-/*
-Gauge
 
-Gauge常规数值，例如 温度变化、内存使用变化。可变大，可变小。重启进程后，会被重置。
-
-例如： memory_usage_bytes{host=”master-01″}
-100 < 抓取值、memory_usage_bytes{host=”master-01″}
-30、memory_usage_bytes{host=”master-01″}
-50、memory_usage_bytes{host=”master-01″}
-80 < 抓取值。
- */
 // Gauge stores a numerical value that can be add arbitrarily.
 type Gauge interface {
 	Metric

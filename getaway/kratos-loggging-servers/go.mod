@@ -7,9 +7,6 @@ require (
 	github.com/bilibili/kratos v0.1.0
 	github.com/gogo/protobuf v1.2.1 // indirect
 	github.com/golang/protobuf v1.3.1
-	github.com/kr/fs v0.1.0 // indirect
-	github.com/pkg/sftp v1.10.0 // indirect
-	github.com/satori/go.uuid v1.2.0 // indirect
 	golang.org/x/net v0.0.0-20190420063019-afa5a82059c6 // indirect
 )
 
@@ -27,4 +24,5 @@ replace (
 	google.golang.org/appengine => github.com/golang/appengine v1.1.0
 	google.golang.org/genproto => github.com/google/go-genproto v0.0.0-20180817151627-c66870c02cf8
 	google.golang.org/grpc => github.com/grpc/grpc-go v1.20.1
+	gopkg.in/mgo.v2 => github.com/globalsign/mgo v0.0.0
 )

@@ -24,10 +24,3 @@ func (i *Iterator) Bucket() Bucket {
 	i.cur = i.cur.Next()
 	return bucket
 }
-
-func (i *Iterator)Print()  {
-	fmt.Println("....Iterator ...")
-	fmt.Println("Iterator count",i.count)
-	fmt.Println("Iterator cur=",i.cur)
-	fmt.Println("Iterator iteratedCount=",i.iteratedCount)
-}

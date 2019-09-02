@@ -10,7 +10,6 @@ import (
 	"github.com/bilibili/kratos/pkg/net/ip"
 
 	"github.com/pkg/errors"
-
 )
 
 var _hostHash byte
@@ -50,7 +49,6 @@ var _ctxkey ctxKey = "kratos/pkg/net/trace.trace"
 // FromContext returns the trace bound to the context, if any.
 func FromContext(ctx context.Context) (t Trace, ok bool) {
 	t, ok = ctx.Value(_ctxkey).(Trace)
-	//fmt.Println("_ctxkey = ",t)
 	return
 }
 

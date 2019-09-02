@@ -1,13 +1,13 @@
 package loggings
 
 import (
+	"fmt"
+	"github.com/KXX747/wolf/getaway/kratos-loggging-servers/internal/dao"
 	"github.com/KXX747/wolf/getaway/kratos-loggging-servers/internal/server/common"
 	"github.com/bilibili/kratos/pkg/log"
-	"github.com/KXX747/wolf/getaway/kratos-loggging-servers/internal/dao"
 	"net"
-	"time"
 	"sync"
-	"fmt"
+	"time"
 )
 /**
 日志收集
@@ -45,18 +45,19 @@ func(mLogService *LogService) initUnix(svc *dao.Config) {
 	var unixListener *net.UnixListener
 	var err error
 	//svc.AppConfig.Log.Agent.Addr
-	//err:=common.ListenUNIX(agent.Addr)
+	common.RemoveFilePath(agent.Addr)
+	//err=common.ListenUNIX(agent.Addr)
 	//if err!=nil {
 	//	log.Info("agent start log server err=%s addr=%s",err,agent.Addr)
 	//	return
 	//}
-	common.RemoveFilePath(agent.Addr)
+
 	//ticker:=time.NewTicker(megreWait)
 	log.Info("agent addr=%s  peoto=%s timeout=%s", agent.Addr, agent.Network, agent.Timeout)
 	unixAddr, _ := net.ResolveUnixAddr(agent.Network, agent.Addr)
 	unixListener, err = net.ListenUnix(agent.Network, unixAddr)
 	if err!=nil {
-		fmt.Println("ListenUnix err=", err)
+		log.Info("loggings server start fial=%s", err)
 		return
 	}
 	defer unixListener.Close()
@@ -64,12 +65,10 @@ func(mLogService *LogService) initUnix(svc *dao.Config) {
 	for {
 		unixConn, err := unixListener.AcceptUnix()
 		if err != nil {
-			log.Info("unixListener.AcceptUnix err=%s",err)
+			log.Info("logging unixListener.AcceptUnix err=%s",err)
 			continue
 		}
-		//log.Info("A client connected : err= " )
 		go unixPipe(unixConn,mLogService)
-		//go unixPipeByte(unixConn)
 	}
 }
 
@@ -93,11 +92,8 @@ func unixPipe(conn *net.UnixConn,mLogService *LogService) {
 		if n>0 {
 			//解析opentracing数据
 			content:=p[:]
-			fmt.Println("message= ",string(content))
+
 		}
-		//回复客户端
-		conn.Write([]byte("\n"))
-		time.Sleep(time.Second)
 	}
 }
 

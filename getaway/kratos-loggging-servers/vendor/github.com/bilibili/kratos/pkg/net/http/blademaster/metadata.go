@@ -52,8 +52,7 @@ var _parser = map[string]func(string) interface{}{
 
 func parseMetadataTo(req *http.Request, to metadata.MD) {
 	for rawKey := range req.Header {
-
-		key := strings.Replace(strings.TrimLeft(strings.ToLower(rawKey), _httpHeaderMetadata), "-", "_",-1)
+		key := strings.ReplaceAll(strings.TrimLeft(strings.ToLower(rawKey), _httpHeaderMetadata), "-", "_")
 		rawValue := req.Header.Get(rawKey)
 		var value interface{} = rawValue
 		parser, ok := _parser[key]
@@ -70,7 +69,7 @@ func setMetadata(req *http.Request, key string, value interface{}) {
 	if !ok {
 		return
 	}
-	header := fmt.Sprintf("%s%s", _httpHeaderMetadata, strings.Replace(key, "_", "-",-1))
+	header := fmt.Sprintf("%s%s", _httpHeaderMetadata, strings.ReplaceAll(key, "_", "-"))
 	req.Header.Set(header, strV)
 }
 

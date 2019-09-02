@@ -40,6 +40,23 @@
 [expire]
     redisExpire = "24h"
 
+
+[mongo]
+	addr = "127.0.0.1:27017"
+	dsn = "127.0.0.1:27017"
+	readDSN =["127.0.0.1:27017","127.0.0.1:27017"]
+	active = 20
+	idle = 10
+	idleTimeout ="4h"
+	queryTimeout = "200ms"
+	execTimeout = "300ms"
+	tranTimeout = "400ms"
+
+[clusters]
+[clusters.test]
+cluster = "test_kafka_9092-266"
+brokers = ["192.168.57.134:9092",",192.168.57.135:9092","192.168.57.136:9092"]
+
 [log]
     family = "app-log"
     stdout=true

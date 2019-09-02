@@ -30,9 +30,3 @@ func Recovery() HandlerFunc {
 		c.Next()
 	}
 }
-
-func Zk()HandlerFunc  {
-	return func(context *Context) {
-
-	}
-}
