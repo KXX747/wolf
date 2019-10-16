@@ -20,6 +20,9 @@ export GO111MODULE=on
 go mod download
 go mod vendor 
 
+//版本替换，sys
+https://yq.aliyun.com/articles/705442
+
 
 //添加库
 go mod edit -replace=golang.org/x/image@v0.0.0-20180708004352-c73c2afc3b81=github.com/golang/image@v0.0.0-20180708004352-c73c2afc3b81
